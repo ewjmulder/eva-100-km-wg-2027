@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const feiten = [
+  { icon: '🌍', titel: 'Wereldevenement', tekst: 'De World Gymnaestrada is het grootste niet-competitieve gymnaestiek festival ter wereld.' },
+  { icon: '📍', titel: 'Lissabon 2027', tekst: 'In 2027 vindt het evenement plaats in Lissabon, Portugal. Duizenden deelnemers uit de hele wereld.' },
+  { icon: '🏅', titel: 'Elke 4 jaar', tekst: 'Het event wordt elke 4 jaar georganiseerd door de FIG (Fédération Internationale de Gymnastique).' },
+];
+---
+
+<Layout title="World Gymnaestrada" beschrijving="Alles over de World Gymnaestrada 2027 in Lissabon en Unitas Doorn.">
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="text-5xl mb-3">🤸‍♀️</div>
+        <h1 class="text-4xl font-black mb-3"><span class="gradient-tekst">World Gymnaestrada</span></h1>
+        <p class="text-gray-500">Lissabon, Portugal · 2027</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-12">
+        {feiten.map(item => (
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+            <div class="text-3xl mb-2">{item.icon}</div>
+            <h3 class="font-black text-donker mb-2">{item.titel}</h3>
+            <p class="text-gray-500 text-sm">{item.tekst}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="space-y-8 text-gray-600">
+        <div>
+          <h2 class="text-2xl font-black text-donker mb-3">Wat is de World Gymnaestrada?</h2>
+          <p class="leading-relaxed">
+            De World Gymnaestrada is een vierjaarlijks gymnaestiek festival dat niet om winst of verlies draait,
+            maar om samen bewegen, cultuur en internationale vriendschappen. Duizenden gymnasts van over de hele
+            wereld komen samen om shows te geven en te genieten van elkaars kunst.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-black text-donker mb-3">Unitas in Doorn</h2>
+          <p class="leading-relaxed">
+            Eva turnt bij <strong>Unitas</strong> in Doorn. Het is een actieve gymvereniging die al jaren
+            meedoet aan evenementen zoals de Gymnaestrada. In 2027 willen ze er met een groep heen — maar
+            zo'n reis kost geld. Dat is waar Eva bij wil helpen!
+          </p>
+          <p class="leading-relaxed mt-3 italic text-gray-400">
+            [Vul hier meer details in over Unitas Doorn en hun plannen voor Lissabon...]
+          </p>
+        </div>
+
+        <div class="bg-geel/20 rounded-2xl p-6 border-l-4 border-geel">
+          <h3 class="font-black text-donker mb-2">🎯 Het doel</h3>
+          <p class="text-gray-600">
+            Met de opbrengst van Eva's fietstocht helpen we de turnsters van Unitas Doorn om hun droom
+            waar te maken: deelnemen aan de World Gymnaestrada 2027 in Lissabon!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
