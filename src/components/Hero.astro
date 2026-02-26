@@ -1,0 +1,117 @@
+---
+// Pas de datum aan als de exacte datum bekend is
+// Huidige placeholder: 3 mei 2026 (voor Eva's 11e verjaardag op 17 mei)
+const FIETSTOCHT_DATUM = '2026-05-03T08:00:00';
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-donker via-blue-900 to-donker">
+
+  <!-- Achtergrond animatie: drijvende kleurblobs -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+    <!-- Animerende fietser emoji -->
+    <div class="text-6xl mb-4 animate-bounce" aria-hidden="true">🚴‍♀️</div>
+
+    <h1 class="text-4xl md:text-6xl font-black text-white mb-4 leading-tight">
+      Eva fietst<br>
+      <span class="gradient-tekst">100 kilometer!</span>
+    </h1>
+
+    <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+      Voor de reis van Unitas Doorn naar de
+      <strong class="text-geel">World Gymnaestrada 2027</strong> in Lissabon, Portugal.
+      Eva (11) en haar vader Erik fietsen samen 100 km om dit te sponsoren.
+    </p>
+
+    <!-- Countdown timer -->
+    <div class="mb-10">
+      <p class="text-gray-400 text-sm uppercase tracking-widest mb-3">Aftellen tot de tocht</p>
+      <div class="flex justify-center gap-3 md:gap-4" role="timer" aria-label="Aftellen tot de fietstocht">
+        {['dagen', 'uur', 'minuten', 'seconden'].map(eenheid => (
+          <div class="bg-white/10 backdrop-blur rounded-xl p-3 min-w-[65px] md:min-w-[80px]">
+            <div class={`text-2xl md:text-3xl font-black text-geel countdown-${eenheid}`} aria-live="off">--</div>
+            <div class="text-xs text-gray-400 mt-1">{eenheid}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA knop -->
+    <a
+      href="/doneer"
+      class="inline-block bg-oranje hover:bg-orange-400 text-white font-black text-lg px-10 py-4 rounded-full shadow-lg shadow-oranje/30 hover:scale-105 active:scale-95 transition-all"
+    >
+      💸 Doneer nu!
+    </a>
+  </div>
+</section>
+
+<style>
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: drijf 8s ease-in-out infinite alternate;
+  }
+  .blob-1 {
+    width: 400px; height: 400px;
+    background: #00C4B4;
+    top: -100px; left: -100px;
+    animation-delay: 0s;
+  }
+  .blob-2 {
+    width: 300px; height: 300px;
+    background: #FF6B35;
+    top: 50%; right: -50px;
+    animation-delay: 3s;
+  }
+  .blob-3 {
+    width: 250px; height: 250px;
+    background: #FFD700;
+    bottom: -50px; left: 40%;
+    animation-delay: 6s;
+  }
+  @keyframes drijf {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.1); }
+  }
+</style>
+
+<script define:vars={{ FIETSTOCHT_DATUM }}>
+  function updateCountdown() {
+    const verschil = new Date(FIETSTOCHT_DATUM).getTime() - Date.now();
+
+    const elDagen    = document.querySelector('.countdown-dagen');
+    const elUur      = document.querySelector('.countdown-uur');
+    const elMinuten  = document.querySelector('.countdown-minuten');
+    const elSeconden = document.querySelector('.countdown-seconden');
+
+    if (!elDagen || !elUur || !elMinuten || !elSeconden) return;
+
+    if (verschil <= 0) {
+      elDagen.textContent = '🎉';
+      elUur.textContent = '0';
+      elMinuten.textContent = '0';
+      elSeconden.textContent = '0';
+      return;
+    }
+
+    const dag = 1000 * 60 * 60 * 24;
+    const uur = 1000 * 60 * 60;
+    const min = 1000 * 60;
+
+    elDagen.textContent    = String(Math.floor(verschil / dag));
+    elUur.textContent      = String(Math.floor((verschil % dag) / uur));
+    elMinuten.textContent  = String(Math.floor((verschil % uur) / min));
+    elSeconden.textContent = String(Math.floor((verschil % min) / 1000));
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
