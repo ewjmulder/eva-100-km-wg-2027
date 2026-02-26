@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /donations/{docId} {
+      allow read: if true;
+      allow create: if request.resource.data.naam is string
+                    && request.resource.data.naam.size() > 0
+                    && request.resource.data.naam.size() < 100
+                    && request.resource.data.bedragPerKm is number
+                    && request.resource.data.bedragPerKm > 0
+                    && request.resource.data.bedragPerKm <= 10
+                    && request.resource.data.publiek is bool;
+      allow update, delete: if false;
+    }
+  }
+}
