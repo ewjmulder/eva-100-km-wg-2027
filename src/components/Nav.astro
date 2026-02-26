@@ -1,0 +1,52 @@
+---
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/doneer', label: 'Doneer' },
+  { href: '/donateurs', label: 'Donateurs' },
+  { href: '/vorige-tocht', label: 'Vorige Tocht' },
+  { href: '/gymnaestrada', label: 'World Gymnaestrada' },
+  { href: '/training', label: 'Training' },
+];
+const huidigPad = Astro.url.pathname;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="text-xl font-black gradient-tekst">Eva 🚴 100 km</a>
+
+    <ul class="hidden md:flex gap-6 text-sm font-semibold">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href}
+             class={`hover:text-turkoois transition-colors ${huidigPad === item.href ? 'text-turkoois' : 'text-donker'}`}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button id="menu-knop" class="md:hidden p-2" aria-label="Menu openen">
+      <div class="w-6 h-0.5 bg-donker mb-1"></div>
+      <div class="w-6 h-0.5 bg-donker mb-1"></div>
+      <div class="w-6 h-0.5 bg-donker"></div>
+    </button>
+  </div>
+
+  <div id="mobiel-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+    <ul class="flex flex-col px-4 py-2">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href} class="block py-3 font-semibold hover:text-turkoois transition-colors">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  document.getElementById('menu-knop')?.addEventListener('click', () => {
+    document.getElementById('mobiel-menu')?.classList.toggle('hidden');
+  });
+</script>
