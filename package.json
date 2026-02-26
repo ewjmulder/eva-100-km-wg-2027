@@ -1,5 +1,5 @@
 {
-  "name": "yes",
+  "name": "eva-100-km-wg-2027",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
     "firebase": "^12.9.0",
