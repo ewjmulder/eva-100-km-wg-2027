@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Doneer" beschrijving="Steun Eva's fietstocht van 100 km met een donatie-belofte per kilometer.">
+  <section class="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-lg mx-auto">
+      <div class="text-center mb-10">
+        <div class="text-5xl mb-3">💸</div>
+        <h1 class="text-4xl font-black mb-3"><span class="gradient-tekst">Doneer</span></h1>
+        <p class="text-gray-500">
+          Kies een bedrag per kilometer. Bij 100 km wordt dat het totale donatiebedrag.
+          Betaling gaat buiten de website om — we nemen contact op na de tocht!
+        </p>
+      </div>
+
+      <div id="succes-bericht" class="hidden bg-turkoois/10 border border-turkoois rounded-2xl p-6 text-center mb-6">
+        <div class="text-4xl mb-2">🎉</div>
+        <h2 class="text-xl font-black text-turkoois mb-1">Bedankt!</h2>
+        <p class="text-gray-600 text-sm">Jouw belofte is geregistreerd. We nemen na de tocht contact op!</p>
+      </div>
+
+      <form id="donatie-formulier" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+        <!-- Honeypot: verborgen voor mensen, zichtbaar voor bots -->
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+
+        <div>
+          <label for="naam" class="block text-sm font-bold text-gray-700 mb-1">Jouw naam *</label>
+          <input type="text" id="naam" required maxlength="100" placeholder="Bijv. Oma Lies"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-bold text-gray-700 mb-1">
+            E-mailadres <span class="text-gray-400 font-normal">(optioneel, niet publiek)</span>
+          </label>
+          <input type="email" id="email" placeholder="jouw@email.nl"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-3">Bedrag per kilometer *</label>
+          <div class="grid grid-cols-4 gap-2 mb-3">
+            {[0.10, 0.25, 0.50, 1.00].map(bedrag => (
+              <button type="button"
+                class="preset-knop border-2 border-gray-200 rounded-xl py-3 font-bold text-sm hover:border-turkoois hover:text-turkoois transition-all"
+                data-bedrag={String(bedrag)}>
+                € {bedrag.toFixed(2)}
+              </button>
+            ))}
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-500 font-medium">€</span>
+            <input type="number" id="bedrag-per-km" required min="0.01" max="10" step="0.01"
+              placeholder="Zelf invoeren"
+              class="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
+            <span class="text-gray-500 font-medium whitespace-nowrap">/ km</span>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">
+            = <span id="totaal-preview" class="font-bold text-turkoois">€ 0,00</span> totaal bij 100 km
+          </p>
+        </div>
+
+        <div>
+          <label for="bericht" class="block text-sm font-bold text-gray-700 mb-1">
+            Bericht <span class="text-gray-400 font-normal">(optioneel, max 200 tekens)</span>
+          </label>
+          <textarea id="bericht" maxlength="200" rows="3"
+            placeholder="Bijv. Succes meid! Je kan het!"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors resize-none"></textarea>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="publiek" checked class="mt-1 w-4 h-4 accent-turkoois" />
+          <label for="publiek" class="text-sm text-gray-600">
+            Mijn naam en bericht mogen publiek zichtbaar zijn op de website
+          </label>
+        </div>
+
+        <button type="submit" id="submit-knop"
+          class="w-full bg-oranje hover:bg-orange-400 text-white font-black text-lg py-4 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-oranje/30">
+          🚴 Beloof mijn donatie!
+        </button>
+
+        <div id="fout-bericht" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm text-center"></div>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { voegDonatieToe } from '../lib/donations';
+  import { formatEuro } from '../lib/dom';
+
+  // Preset knoppen
+  document.querySelectorAll('.preset-knop').forEach(knop => {
+    knop.addEventListener('click', () => {
+      const bedrag = (knop as HTMLElement).dataset.bedrag ?? '';
+      (document.getElementById('bedrag-per-km') as HTMLInputElement).value = bedrag;
+      document.querySelectorAll('.preset-knop').forEach(k =>
+        k.classList.remove('border-turkoois', 'text-turkoois', 'bg-turkoois/5')
+      );
+      knop.classList.add('border-turkoois', 'text-turkoois', 'bg-turkoois/5');
+      updateVooruitkijk();
+    });
+  });
+
+  function updateVooruitkijk() {
+    const invoer = document.getElementById('bedrag-per-km') as HTMLInputElement;
+    const preview = document.getElementById('totaal-preview');
+    const bedrag = parseFloat(invoer?.value ?? '0') || 0;
+    if (preview) preview.textContent = formatEuro(bedrag * 100);
+  }
+
+  document.getElementById('bedrag-per-km')?.addEventListener('input', updateVooruitkijk);
+
+  function gooidConfetti() {
+    const kleuren = ['#00C4B4', '#FF6B35', '#FFD700', '#ffffff'];
+    for (let i = 0; i < 80; i++) {
+      const stuk = document.createElement('div');
+      const kleur = kleuren[Math.floor(Math.random() * kleuren.length)];
+      const isRond = Math.random() > 0.5;
+      const duur = 0.8 + Math.random() * 1.5;
+      const rotation = Math.random() * 720;
+      const startX = Math.random() * 100;
+
+      stuk.style.cssText = [
+        'position:fixed',
+        'width:10px',
+        'height:10px',
+        `background:${kleur}`,
+        `border-radius:${isRond ? '50%' : '2px'}`,
+        `left:${startX}vw`,
+        'top:-10px',
+        'z-index:9999',
+        'pointer-events:none',
+      ].join(';');
+
+      const animNaam = `confetti-val-${i}-${Date.now()}`;
+      const style = document.createElement('style');
+      style.textContent = `@keyframes ${animNaam} { to { transform: translateY(110vh) rotate(${rotation}deg); opacity: 0; } }`;
+      stuk.style.animation = `${animNaam} ${duur}s ease-in forwards`;
+
+      document.head.appendChild(style);
+      document.body.appendChild(stuk);
+      setTimeout(() => { stuk.remove(); style.remove(); }, Math.ceil(duur * 1000) + 200);
+    }
+  }
+
+  document.getElementById('donatie-formulier')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Honeypot check
+    const honeypot = (document.querySelector('input[name="website"]') as HTMLInputElement)?.value ?? '';
+    if (honeypot) return; // Stille spam-blokkering
+
+    const knop = document.getElementById('submit-knop') as HTMLButtonElement;
+    const fout = document.getElementById('fout-bericht');
+    if (fout) {
+      fout.classList.add('hidden');
+      fout.textContent = '';
+    }
+    if (knop) {
+      knop.disabled = true;
+      knop.textContent = '⏳ Versturen…';
+    }
+
+    try {
+      const bedragPerKm = parseFloat((document.getElementById('bedrag-per-km') as HTMLInputElement)?.value ?? '');
+      if (isNaN(bedragPerKm) || bedragPerKm <= 0 || bedragPerKm > 10) {
+        throw new Error('Voer een geldig bedrag in (€ 0,01 – € 10,00 per km)');
+      }
+
+      const naam = ((document.getElementById('naam') as HTMLInputElement)?.value ?? '').trim();
+      if (!naam) throw new Error('Vul je naam in');
+
+      const email = ((document.getElementById('email') as HTMLInputElement)?.value ?? '').trim();
+      const berichtWaarde = ((document.getElementById('bericht') as HTMLTextAreaElement)?.value ?? '').trim();
+      const publiek = (document.getElementById('publiek') as HTMLInputElement)?.checked ?? false;
+
+      await voegDonatieToe({
+        naam,
+        email: email || undefined,
+        bedragPerKm,
+        bericht: berichtWaarde || undefined,
+        publiek,
+      });
+
+      document.getElementById('donatie-formulier')?.classList.add('hidden');
+      document.getElementById('succes-bericht')?.classList.remove('hidden');
+      gooidConfetti();
+
+    } catch (err) {
+      const bericht = err instanceof Error ? err.message : 'Er ging iets mis. Probeer het opnieuw.';
+      if (fout) {
+        fout.textContent = bericht; // textContent — geen XSS risico
+        fout.classList.remove('hidden');
+      }
+      if (knop) {
+        knop.disabled = false;
+        knop.textContent = '🚴 Beloof mijn donatie!';
+      }
+    }
+  });
+</script>
