@@ -1,0 +1,48 @@
+<section class="py-16 px-4 bg-donker text-white">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-black text-center mb-2">
+      ❤️ <span class="gradient-tekst">Recente donateurs</span>
+    </h2>
+    <p class="text-center text-gray-400 mb-10">Dank jullie wel!</p>
+
+    <div id="donateurs-lijst" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div class="col-span-full text-center text-gray-500 py-4">Laden…</div>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="/donateurs" class="text-turkoois hover:text-teal-300 font-semibold transition-colors">
+        Bekijk alle donateurs →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { haalDonaties } from '../lib/donations';
+  import { maakDonateurKaartje, maakEl } from '../lib/dom';
+
+  async function laadRecenteDonateurs() {
+    const lijst = document.getElementById('donateurs-lijst');
+    if (!lijst) return;
+
+    try {
+      const donaties = await haalDonaties();
+      const recente = donaties.slice(0, 6);
+
+      lijst.replaceChildren();
+
+      if (recente.length === 0) {
+        lijst.appendChild(
+          maakEl('p', 'col-span-full text-center text-gray-400', 'Wees de eerste donateur!')
+        );
+        return;
+      }
+
+      recente.forEach(d => lijst.appendChild(maakDonateurKaartje(d)));
+    } catch (e) {
+      console.error('Fout bij laden donateurs:', e);
+    }
+  }
+
+  laadRecenteDonateurs();
+</script>
