@@ -7,8 +7,8 @@ Fundraising website voor Eva's fietstocht van 100 km voor de World Gymnaestrada 
 - **Framework:** Astro 5 (static output, `npm run build` → `dist/`)
 - **Styling:** Tailwind v4 — configuratie via `@theme` in `src/styles/global.css` (geen `tailwind.config.mjs`)
 - **Database:** Firebase Firestore (client-side only, geen backend)
-- **Hosting:** GCP bucket via Cloudflare CNAME subdomain
-- **CI/CD:** GitHub Actions (`.github/workflows/deploy.yml`)
+- **Hosting:** Firebase Hosting (`eva-100km-wg-2027.web.app`)
+- **Deploy:** handmatig via `firebase deploy`
 
 ## Projectstructuur
 
@@ -36,8 +36,9 @@ src/
   styles/global.css             # Tailwind v4 @theme, @layer base/utilities
 public/images/vorige-tocht/     # Foto's vorige tocht (handmatig toevoegen)
 firestore.rules                 # Firestore security rules
+firebase.json                   # Firebase Hosting + Firestore configuratie
+.firebaserc                     # Firebase project koppeling
 .env.example                    # Template voor Firebase config
-.github/workflows/deploy.yml    # GCP deploy workflow
 ```
 
 ## Tailwind v4
@@ -79,7 +80,7 @@ Firebase draait **client-side**. Gebruik altijd een gewoon `<script>` blok met E
 Firebase config staat in `.env` (niet in git). Template: `.env.example`.
 Astro leest variabelen met `PUBLIC_` prefix client-side via `import.meta.env.PUBLIC_*`.
 
-In GitHub Actions staan de waarden als secrets (zie `deploy.yml`).
+Bij deploy: zorg dat `.env` lokaal aanwezig is met de correcte waarden.
 
 ## Veelgebruikte commando's
 
@@ -91,9 +92,12 @@ npm run preview  # Preview van de build
 
 ## Deploy
 
-1. Vervang `JOUW_BUCKET_NAAM` in `.github/workflows/deploy.yml`
-2. Stel GitHub Secrets in: `FIREBASE_*` vars + `GCP_SA_KEY`
-3. `git push origin main` triggert automatische deploy
+```bash
+npm run build
+firebase deploy
+```
+
+Live op: https://eva-100km-wg-2027.web.app
 
 ## Content placeholders (nog in te vullen)
 
