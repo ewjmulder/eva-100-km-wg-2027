@@ -3,6 +3,8 @@ import {
   collection,
   addDoc,
   getDocs,
+  updateDoc,
+  doc,
   query,
   orderBy,
   serverTimestamp,
@@ -14,6 +16,8 @@ export interface Donatie {
   naam: string;
   bedragPerKm: number;
   bericht?: string;
+  vraag?: string;
+  antwoord?: string;
   publiek: boolean;
   email?: string;
   timestamp?: Timestamp;
@@ -29,6 +33,10 @@ export async function voegDonatieToe(
     timestamp: serverTimestamp(),
   });
   return ref.id;
+}
+
+export async function beantwoordVraag(id: string, antwoord: string): Promise<void> {
+  await updateDoc(doc(db, 'donations', id), { antwoord });
 }
 
 export async function haalDonaties(): Promise<Donatie[]> {

@@ -10,7 +10,8 @@ service cloud.firestore {
                     && request.resource.data.bedragPerKm > 0
                     && request.resource.data.bedragPerKm <= 10
                     && request.resource.data.publiek is bool;
-      allow update, delete: if false;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['antwoord']);
+      allow delete: if false;
     }
   }
 }
