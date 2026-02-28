@@ -117,40 +117,127 @@ import Layout from '../layouts/Layout.astro';
           <ellipse cx="842" cy="168" rx="19" ry="25" fill="#1B5E20"/>
           <ellipse cx="842" cy="163" rx="13" ry="16" fill="#2E7D32"/>
 
-          <!-- START vlag -->
-          <rect x="42" y="192" width="3.5" height="48" fill="#424242"/>
-          <polygon points="45.5,192 72,202 45.5,214" fill="#00C4B4"/>
-          <text x="46" y="295" font-size="9.5" fill="#616161" font-family="sans-serif" font-weight="bold" text-anchor="middle">START</text>
+          <!-- ═══════════════════════════════════════════
+               BORDJES — hoge stokken, ruim boven het fietspoppetje
+               Stok loopt van wegoppervlak (y=238) omhoog tot y≈108
+               Bordje hangt bovenaan de stok
+          ═══════════════════════════════════════════ -->
 
-          <!-- 25 km mijlpaal -->
-          <rect x="284" y="198" width="3" height="42" fill="#9E9E9E"/>
-          <rect x="287" y="198" width="34" height="18" fill="#FDD835" rx="3"/>
-          <text x="304" y="211" font-size="10" fill="#333" font-family="sans-serif" font-weight="bold" text-anchor="middle">25 km</text>
+          <!-- START bordje (€0) — groen -->
+          <g transform="translate(42, 238)">
+            <rect x="-2" y="-130" width="4" height="130" fill="#424242"/>
+            <rect x="-25" y="-153" width="50" height="25" rx="4" fill="#4CAF50" stroke="#2E7D32" stroke-width="1.5"/>
+            <text x="0" y="-136" font-size="12" fill="white" text-anchor="middle" font-weight="bold" font-family="sans-serif">€ 0</text>
+          </g>
 
-          <!-- 50 km mijlpaal -->
-          <rect x="524" y="195" width="3" height="45" fill="#9E9E9E"/>
-          <rect x="527" y="195" width="34" height="18" fill="#FF6B35" rx="3"/>
-          <text x="544" y="208" font-size="10" fill="white" font-family="sans-serif" font-weight="bold" text-anchor="middle">50 km</text>
+          <!-- Startstreep over de weg — twee witte banen -->
+          <rect x="57" y="238" width="5" height="52" fill="white" opacity="0.9"/>
+          <rect x="66" y="238" width="5" height="52" fill="white" opacity="0.9"/>
 
-          <!-- 75 km mijlpaal -->
-          <rect x="763" y="198" width="3" height="42" fill="#9E9E9E"/>
-          <rect x="766" y="198" width="34" height="18" fill="#FDD835" rx="3"/>
-          <text x="783" y="211" font-size="10" fill="#333" font-family="sans-serif" font-weight="bold" text-anchor="middle">75 km</text>
+          <!-- € 250 mijlpaal — geel -->
+          <g transform="translate(284, 238)">
+            <rect x="-2" y="-130" width="4" height="130" fill="#757575"/>
+            <rect x="-29" y="-153" width="58" height="25" rx="4" fill="#FDD835" stroke="#F9A825" stroke-width="1.5"/>
+            <text x="0" y="-136" font-size="12" fill="#333" text-anchor="middle" font-weight="bold" font-family="sans-serif">€ 250</text>
+          </g>
 
-          <!-- FINISH geruite vlag -->
-          <rect x="952" y="186" width="3.5" height="54" fill="#424242"/>
-          <!-- Geruite vlag 4x2 blokjes -->
-          <rect x="955.5" y="186" width="10" height="10" fill="#333"/>
-          <rect x="965.5" y="186" width="10" height="10" fill="white"/>
-          <rect x="975.5" y="186" width="10" height="10" fill="#333"/>
-          <rect x="955.5" y="196" width="10" height="10" fill="white"/>
-          <rect x="965.5" y="196" width="10" height="10" fill="#333"/>
-          <rect x="975.5" y="196" width="10" height="10" fill="white"/>
-          <text x="970" y="295" font-size="9.5" fill="#616161" font-family="sans-serif" font-weight="bold" text-anchor="middle">100 km</text>
+          <!-- € 500 mijlpaal — oranje -->
+          <g transform="translate(524, 238)">
+            <rect x="-2" y="-130" width="4" height="130" fill="#757575"/>
+            <rect x="-29" y="-153" width="58" height="25" rx="4" fill="#FF6B35" stroke="#E55A2B" stroke-width="1.5"/>
+            <text x="0" y="-136" font-size="12" fill="white" text-anchor="middle" font-weight="bold" font-family="sans-serif">€ 500</text>
+          </g>
+
+          <!-- € 750 mijlpaal — geel -->
+          <g transform="translate(763, 238)">
+            <rect x="-2" y="-130" width="4" height="130" fill="#757575"/>
+            <rect x="-29" y="-153" width="58" height="25" rx="4" fill="#FDD835" stroke="#F9A825" stroke-width="1.5"/>
+            <text x="0" y="-136" font-size="12" fill="#333" text-anchor="middle" font-weight="bold" font-family="sans-serif">€ 750</text>
+          </g>
+
+          <!-- ═══════════════════════════════════════════
+               FINISH VERSIERING: slingers, ballonnen, lint, streep, bordje
+          ═══════════════════════════════════════════ -->
+
+          <!-- Slingers (vlaggenlijn boven de finish) -->
+          <line x1="900" y1="128" x2="998" y2="122" stroke="#555" stroke-width="1.5"/>
+          <polygon points="903,128 915,128 909,145" fill="#FF6B35"/>
+          <polygon points="919,127 931,127 925,144" fill="#FFD700"/>
+          <polygon points="935,126 947,126 941,143" fill="#00C4B4"/>
+          <polygon points="951,126 963,125 957,142" fill="#FF69B4"/>
+          <polygon points="967,125 979,124 973,141" fill="#FF6B35"/>
+          <polygon points="983,124 995,123 989,140" fill="#FFD700"/>
+
+          <!-- Ballonnen rechts boven de finish -->
+          <circle cx="928" cy="188" r="11" fill="#FF69B4"/>
+          <path d="M 928,199 Q 925,210 924,224" stroke="#FF69B4" stroke-width="1.5" fill="none"/>
+
+          <circle cx="948" cy="174" r="13" fill="#FF6B35"/>
+          <path d="M 948,187 Q 945,200 944,217" stroke="#FF6B35" stroke-width="1.5" fill="none"/>
+
+          <circle cx="970" cy="168" r="12" fill="#FFD700"/>
+          <path d="M 970,180 Q 967,194 966,211" stroke="#FFD700" stroke-width="1.5" fill="none"/>
+
+          <circle cx="990" cy="180" r="10" fill="#00C4B4"/>
+          <path d="M 990,190 Q 988,203 987,219" stroke="#00C4B4" stroke-width="1.5" fill="none"/>
+
+          <!-- FINISH bordje (€1000) — turquoise -->
+          <g transform="translate(952, 238)">
+            <rect x="-2" y="-130" width="4" height="130" fill="#424242"/>
+            <rect x="-33" y="-155" width="66" height="27" rx="4" fill="#00C4B4" stroke="#007B6E" stroke-width="2"/>
+            <text x="0" y="-137" font-size="13" fill="white" text-anchor="middle" font-weight="bold" font-family="sans-serif">€ 1000</text>
+          </g>
+
+          <!-- Finish lint gespannen over de weg (op fietshoogte) -->
+          <rect x="936" y="221" width="58" height="8" fill="#EF5350" opacity="0.92" rx="1"/>
+          <rect x="936" y="222" width="58" height="3" fill="white" opacity="0.45"/>
+
+          <!-- Finish streep (geblokt zwart-wit) over de weg -->
+          <rect x="936" y="238" width="9" height="9" fill="#222"/>
+          <rect x="945" y="238" width="9" height="9" fill="white"/>
+          <rect x="954" y="238" width="9" height="9" fill="#222"/>
+          <rect x="963" y="238" width="9" height="9" fill="white"/>
+          <rect x="972" y="238" width="9" height="9" fill="#222"/>
+          <rect x="981" y="238" width="9" height="9" fill="white"/>
+
+          <rect x="936" y="247" width="9" height="9" fill="white"/>
+          <rect x="945" y="247" width="9" height="9" fill="#222"/>
+          <rect x="954" y="247" width="9" height="9" fill="white"/>
+          <rect x="963" y="247" width="9" height="9" fill="#222"/>
+          <rect x="972" y="247" width="9" height="9" fill="white"/>
+          <rect x="981" y="247" width="9" height="9" fill="#222"/>
+
+          <rect x="936" y="256" width="9" height="9" fill="#222"/>
+          <rect x="945" y="256" width="9" height="9" fill="white"/>
+          <rect x="954" y="256" width="9" height="9" fill="#222"/>
+          <rect x="963" y="256" width="9" height="9" fill="white"/>
+          <rect x="972" y="256" width="9" height="9" fill="#222"/>
+          <rect x="981" y="256" width="9" height="9" fill="white"/>
+
+          <rect x="936" y="265" width="9" height="9" fill="white"/>
+          <rect x="945" y="265" width="9" height="9" fill="#222"/>
+          <rect x="954" y="265" width="9" height="9" fill="white"/>
+          <rect x="963" y="265" width="9" height="9" fill="#222"/>
+          <rect x="972" y="265" width="9" height="9" fill="white"/>
+          <rect x="981" y="265" width="9" height="9" fill="#222"/>
+
+          <rect x="936" y="274" width="9" height="9" fill="#222"/>
+          <rect x="945" y="274" width="9" height="9" fill="white"/>
+          <rect x="954" y="274" width="9" height="9" fill="#222"/>
+          <rect x="963" y="274" width="9" height="9" fill="white"/>
+          <rect x="972" y="274" width="9" height="9" fill="#222"/>
+          <rect x="981" y="274" width="9" height="9" fill="white"/>
+
+          <rect x="936" y="283" width="9" height="9" fill="white"/>
+          <rect x="945" y="283" width="9" height="9" fill="#222"/>
+          <rect x="954" y="283" width="9" height="9" fill="white"/>
+          <rect x="963" y="283" width="9" height="9" fill="#222"/>
+          <rect x="972" y="283" width="9" height="9" fill="white"/>
+          <rect x="981" y="283" width="9" height="9" fill="#222"/>
 
           <!-- ═══════════════════════════════════════════
                FIETS + EVA (gepositioneerd via JS)
-               Origine: (X, 238) = wegoppervlak
+               Origine: (X, 243) = iets in het wegoppervlak
                Wielen raken de weg op y=0 → center y=-20
           ═══════════════════════════════════════════ -->
           <g id="fiets-groep">
@@ -184,17 +271,11 @@ import Layout from '../layouts/Layout.astro';
             </g>
 
             <!-- Frame (oranje) -->
-            <!-- Chainstay: BB naar achterwiel -->
             <line x1="-3" y1="-22" x2="-22" y2="-20" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Seatstay: achterwiel naar zadelpen top -->
             <line x1="-22" y1="-20" x2="-8" y2="-50" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
-            <!-- Seat tube: BB naar zadelpen top -->
             <line x1="-3" y1="-22" x2="-8" y2="-50" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
-            <!-- Top tube: zadelpen naar stuurpijp -->
             <line x1="-8" y1="-50" x2="18" y2="-42" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
-            <!-- Down tube: BB naar stuurpijp -->
             <line x1="-3" y1="-22" x2="18" y2="-42" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
-            <!-- Vork: stuurpijp naar voorwiel -->
             <line x1="18" y1="-42" x2="22" y2="-20" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
 
             <!-- Trapas -->
@@ -218,19 +299,21 @@ import Layout from '../layouts/Layout.astro';
             <rect x="-18" y="-57" width="20" height="5" fill="#424242" rx="2.5"/>
 
             <!-- ── Eva ── -->
-            <!-- Lichaam (turquoise truitje, gebogen voorover) -->
-            <path d="M -12,-54 Q 2,-56 18,-46" fill="none" stroke="#00C4B4" stroke-width="11" stroke-linecap="round"/>
+            <!-- Lichaam (roze truitje, gebogen voorover) -->
+            <path d="M -12,-54 Q 2,-56 18,-46" fill="none" stroke="#FF69B4" stroke-width="11" stroke-linecap="round"/>
             <!-- Arm naar stuur -->
             <line x1="18" y1="-46" x2="26" y2="-42" stroke="#FDBCB4" stroke-width="4" stroke-linecap="round"/>
 
             <!-- Hoofd -->
             <circle cx="4" cy="-69" r="11" fill="#FDBCB4" stroke="#E8A89A" stroke-width="1.5"/>
 
-            <!-- Haar (donkerbruin, vlechtje opzij) -->
-            <path d="M -6,-75 Q 4,-84 14,-75" stroke="#5D4037" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-            <path d="M 13,-74 Q 20,-72 20,-62" stroke="#5D4037" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-            <!-- Haarbandje -->
-            <circle cx="13" cy="-74" r="3" fill="#FF6B35"/>
+            <!-- Haar (blond) -->
+            <path d="M -6,-75 Q 4,-84 14,-75" stroke="#f4d03f" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M 13,-74 Q 20,-72 20,-62" stroke="#f4d03f" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M -7,-75 Q -10,-68 -8,-62" stroke="#f4d03f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Haarbandje (roze, passend bij truitje) -->
+            <circle cx="13" cy="-74" r="3" fill="#FF69B4"/>
 
             <!-- Oogjes -->
             <circle cx="1" cy="-69" r="1.5" fill="#333"/>
@@ -242,9 +325,9 @@ import Layout from '../layouts/Layout.astro';
             <circle cx="0" cy="-67" r="3" fill="#FFB3A3" opacity="0.5"/>
             <circle cx="8" cy="-67" r="3" fill="#FFB3A3" opacity="0.5"/>
 
-            <!-- Helm (turquoise) -->
-            <path d="M -7,-75 Q 4,-88 15,-75" fill="#00C4B4" opacity="0.8"/>
-            <line x1="-7" y1="-75" x2="15" y2="-75" stroke="#00C4B4" stroke-width="2.5"/>
+            <!-- Helm (roze, passend bij truitje) -->
+            <path d="M -7,-75 Q 4,-88 15,-75" fill="#FF69B4" opacity="0.85"/>
+            <line x1="-7" y1="-75" x2="15" y2="-75" stroke="#FF69B4" stroke-width="2.5"/>
           </g>
         </svg>
       </div>
@@ -311,11 +394,12 @@ import Layout from '../layouts/Layout.astro';
 
   const DOEL = 1500;
 
-  // SVG-coördinaten: fiets rijdt van x=55 (bij startvlag) tot x=935 (bij finishvlag)
-  // De fiets-groep origine zit op het wegoppervlak (y=238 in de SVG)
+  // SVG-coördinaten: fiets rijdt van x=55 (bij startvlag) tot x=920 (bij finishvlag)
+  // De fiets-groep origine zit iets in het wegoppervlak (y=243) zodat de wielen
+  // goed op de weg staan in plaats van net boven het asfalt.
   const START_X = 55;
-  const EIND_X  = 935;
-  const WEG_Y   = 238;
+  const EIND_X  = 920;
+  const WEG_Y   = 243;
 
   function animeerNaar(element: SVGElement, naarX: number) {
     const vanX = START_X;
