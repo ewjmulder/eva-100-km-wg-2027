@@ -1,10 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createHash } from 'crypto';
+
+// PIN wordt server-side gehasht — alleen de hash belandt in de HTML
+const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').digest('hex');
 ---
 
 <Layout title="Voor Eva" beschrijving="">
   <section class="min-h-screen py-20 px-4 bg-gray-50">
     <div class="max-w-2xl mx-auto">
+
+      <!-- Hash verborgen in DOM, nooit de echte PIN -->
+      <div id="pin-hash" data-hash={pinHash} class="hidden"></div>
 
       <!-- PIN scherm -->
       <div id="pin-scherm" class="text-center">
@@ -48,7 +55,13 @@ import Layout from '../layouts/Layout.astro';
   import { haalDonaties, beantwoordVraag } from '../lib/donations';
   import type { Donatie } from '../lib/donations';
 
-  const PIN = 'eva100';
+  const opgeslagenHash = document.getElementById('pin-hash')?.dataset.hash ?? '';
+
+  async function hashPin(pin: string): Promise<string> {
+    const data = new TextEncoder().encode(pin);
+    const buffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
   const pinScherm = document.getElementById('pin-scherm')!;
   const vragenScherm = document.getElementById('vragen-scherm')!;
@@ -58,8 +71,9 @@ import Layout from '../layouts/Layout.astro';
   document.getElementById('pin-knop')?.addEventListener('click', controleerPin);
   pinInvoer.addEventListener('keydown', (e) => { if (e.key === 'Enter') controleerPin(); });
 
-  function controleerPin() {
-    if (pinInvoer.value === PIN) {
+  async function controleerPin() {
+    const hash = await hashPin(pinInvoer.value);
+    if (hash === opgeslagenHash) {
       pinScherm.classList.add('hidden');
       vragenScherm.classList.remove('hidden');
       laadVragen();
@@ -85,7 +99,6 @@ import Layout from '../layouts/Layout.astro';
 
     lijst.replaceChildren();
 
-    // Onbeantwoord eerst
     const gesorteerd = [
       ...metVraag.filter((d: Donatie) => !d.antwoord),
       ...metVraag.filter((d: Donatie) => d.antwoord),
@@ -95,7 +108,6 @@ import Layout from '../layouts/Layout.astro';
       const beantwoord = !!d.antwoord;
       const kaart = document.createElement('div');
       kaart.className = `bg-white rounded-2xl border p-6 ${beantwoord ? 'border-turkoois/30 opacity-70' : 'border-gray-200 shadow-sm'}`;
-      kaart.dataset.id = d.id;
 
       const naam = document.createElement('p');
       naam.className = 'text-xs text-gray-400 mb-1 font-semibold uppercase tracking-wide';
