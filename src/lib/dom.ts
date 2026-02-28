@@ -55,7 +55,7 @@ export function maakDonateurKaartje(donatie: Donatie): HTMLElement {
     );
   }
 
-  if (donatie.publiek && donatie.vraag && donatie.antwoord) {
+  if (donatie.vraag && donatie.antwoord) {
     const qa = maakEl('div', 'mt-3 pt-3 border-t border-gray-100 space-y-1');
     qa.appendChild(maakEl('p', 'text-xs text-gray-400 break-words', '❓ ' + donatie.vraag));
     qa.appendChild(maakEl('p', 'text-xs text-turkoois font-semibold break-words', '💬 Eva: ' + donatie.antwoord));
