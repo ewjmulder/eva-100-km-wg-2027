@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Vul bestandsnamen in als foto's beschikbaar zijn (in public/images/vorige-tocht/60km/)
+const fotos60km: string[] = [
+  // 'foto-1.jpg',
+];
+
+// Vul bestandsnamen in als foto's beschikbaar zijn (in public/images/vorige-tocht/70km/)
+const fotos70km: string[] = [
+  // 'foto-1.jpg',
+];
+---
+
+<Layout title="Vorige Tochten" beschrijving="Eva fietste al eerder grote afstanden: 60 km toen ze 6 jaar was en 70 km toen ze 7 jaar was. Lees de verhalen.">
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-12">
+        <div class="text-5xl mb-3">🚵‍♀️</div>
+        <h1 class="text-4xl font-black mb-3"><span class="gradient-tekst">De vorige tochten</span></h1>
+        <p class="text-gray-500">Eva's fietstraditie — groter en groter elke keer</p>
+      </div>
+
+      <!-- Tijdlijn badges -->
+      <div class="flex justify-center items-center gap-4 mb-14 flex-wrap">
+        <div class="bg-turkoois/10 border-2 border-turkoois rounded-full px-5 py-2 text-center">
+          <span class="font-black text-turkoois">60 km</span>
+          <span class="text-gray-500 text-sm ml-1">· Eva 6 jaar</span>
+        </div>
+        <div class="text-gray-300 text-2xl">→</div>
+        <div class="bg-oranje/10 border-2 border-oranje rounded-full px-5 py-2 text-center">
+          <span class="font-black text-oranje">70 km</span>
+          <span class="text-gray-500 text-sm ml-1">· Eva 7 jaar</span>
+        </div>
+        <div class="text-gray-300 text-2xl">→</div>
+        <div class="bg-geel/20 border-2 border-geel rounded-full px-5 py-2 text-center">
+          <span class="font-black text-donker">100 km</span>
+          <span class="text-gray-500 text-sm ml-1">· Eva 10 jaar ✨</span>
+        </div>
+      </div>
+
+      <!-- Twee kolommen: 60 km links, 70 km rechts -->
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+
+        <!-- Linker kolom: 60 km tocht -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="bg-turkoois/10 border-b border-turkoois/20 px-6 py-5 text-center">
+            <div class="text-4xl font-black text-turkoois mb-1">60 km</div>
+            <div class="text-gray-500 font-semibold">Eva was 6 jaar oud</div>
+          </div>
+
+          <div class="p-6 space-y-4 text-gray-600 leading-relaxed">
+            <p>
+              De allereerste grote fietstocht! Samen met haar vader Erik fietste Eva
+              <strong>60 kilometer</strong> op één dag — toen ze nog maar 6 jaar oud was.
+              Een ongelooflijke prestatie voor zo'n kleine wielrenner.
+            </p>
+            <p class="italic text-gray-400">
+              [Vul hier het echte verhaal in: de route, bijzondere momenten, hoe het was...]
+            </p>
+          </div>
+
+          <!-- Foto's 60 km -->
+          <div class="px-6 pb-6">
+            {fotos60km.length > 0 ? (
+              <div>
+                <h3 class="text-lg font-black mb-3">📸 Foto's</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  {fotos60km.map((foto, i) => (
+                    <a href={`/images/vorige-tocht/60km/${foto}`} target="_blank" rel="noopener"
+                       class="block overflow-hidden rounded-xl aspect-square hover:opacity-90 transition-opacity">
+                      <img
+                        src={`/images/vorige-tocht/60km/${foto}`}
+                        alt={`Foto ${i + 1} van de 60 km tocht`}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div class="bg-turkoois/5 rounded-2xl p-6 text-center text-gray-400 border-2 border-dashed border-turkoois/20">
+                <p class="text-3xl mb-2">📸</p>
+                <p class="text-sm">Foto's komen binnenkort!</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Rechter kolom: 70 km tocht -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="bg-oranje/10 border-b border-oranje/20 px-6 py-5 text-center">
+            <div class="text-4xl font-black text-oranje mb-1">70 km</div>
+            <div class="text-gray-500 font-semibold">Eva was 7 jaar oud</div>
+          </div>
+
+          <div class="p-6 space-y-4 text-gray-600 leading-relaxed">
+            <p>
+              Een jaar later, nóg een stapje verder. 70 kilometer deze keer —
+              ook samen met papa Erik. Want als je één keer weet dat je het kunt,
+              wil je weten hoever je écht kunt gaan.
+            </p>
+            <p class="italic text-gray-400">
+              [Vul hier het echte verhaal in: de route, bijzondere momenten, hoe het was...]
+            </p>
+          </div>
+
+          <!-- Foto's 70 km -->
+          <div class="px-6 pb-6">
+            {fotos70km.length > 0 ? (
+              <div>
+                <h3 class="text-lg font-black mb-3">📸 Foto's</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  {fotos70km.map((foto, i) => (
+                    <a href={`/images/vorige-tocht/70km/${foto}`} target="_blank" rel="noopener"
+                       class="block overflow-hidden rounded-xl aspect-square hover:opacity-90 transition-opacity">
+                      <img
+                        src={`/images/vorige-tocht/70km/${foto}`}
+                        alt={`Foto ${i + 1} van de 70 km tocht`}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div class="bg-oranje/5 rounded-2xl p-6 text-center text-gray-400 border-2 border-dashed border-oranje/20">
+                <p class="text-3xl mb-2">📸</p>
+                <p class="text-sm">Foto's komen binnenkort!</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Onderkant: aanmoediging voor de 100 km -->
+      <div class="mt-12 text-center bg-gradient-to-r from-turkoois/10 to-oranje/10 rounded-3xl p-8 border border-gray-100">
+        <p class="text-xl font-bold text-donker mb-2">En nu? <span class="gradient-tekst">100 kilometer!</span></p>
+        <p class="text-gray-500">Eva is inmiddels 10 jaar, en ze gaat voor haar grootste avontuur ooit.</p>
+        <a href="/doneer" class="inline-block mt-4 bg-oranje text-white font-black px-6 py-3 rounded-full hover:bg-oranje/90 transition-colors">
+          Steun Eva →
+        </a>
+      </div>
+
+    </div>
+  </section>
+</Layout>

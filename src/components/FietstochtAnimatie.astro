@@ -1,0 +1,830 @@
+<!-- Fietstocht scene -->
+<div
+  class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative"
+>
+  <button
+    id="herstart-knop"
+    class="absolute top-2 left-1/2 -translate-x-1/2 z-10 bg-white/80 hover:bg-white text-gray-400 hover:text-turkoois rounded-full px-3 py-1.5 transition-all shadow-sm text-xs font-semibold flex items-center gap-1.5 leading-none"
+    title="Herstart animatie"
+  >
+    <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 fill-current"
+      ><polygon points="1,0.5 9,5 1,9.5"></polygon></svg
+    >
+    Opnieuw
+  </button>
+  <svg
+    id="tocht-scene"
+    viewBox="0 0 1000 300"
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-full block"
+  >
+    <defs>
+      <linearGradient id="lucht" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#42A5F5"></stop>
+        <stop offset="100%" stop-color="#90CAF9"></stop>
+      </linearGradient>
+      <linearGradient id="gras" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#66BB6A"></stop>
+        <stop offset="100%" stop-color="#43A047"></stop>
+      </linearGradient>
+      <linearGradient id="weg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#BDBDBD"></stop>
+        <stop offset="100%" stop-color="#9E9E9E"></stop>
+      </linearGradient>
+    </defs>
+
+    <!-- Lucht -->
+    <rect width="1000" height="300" fill="url(#lucht)"></rect>
+
+    <!-- Zon + roterende stralen -->
+    <g transform="translate(110, 65)">
+      <circle cx="0" cy="0" r="75" fill="#FFF9C4" opacity="0.35"></circle>
+      <g fill="#FFF9C4" opacity="0.8">
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 0 0"
+          to="360 0 0"
+          dur="20s"
+          repeatCount="indefinite"></animateTransform>
+        <polygon points="-6,-65 6,-65 0,-90"></polygon>
+        <polygon points="65,-6 65,6 90,0"></polygon>
+        <polygon points="-6,65 6,65 0,90"></polygon>
+        <polygon points="-65,-6 -65,6 -90,0"></polygon>
+        <polygon points="44,-38 38,-44 54,-54"></polygon>
+        <polygon points="44,38 38,44 54,54"></polygon>
+        <polygon points="-44,38 -38,44 -54,54"></polygon>
+        <polygon points="-44,-38 -38,-44 -54,-54"></polygon>
+      </g>
+      <circle cx="0" cy="0" r="52" fill="#FFF176" opacity="0.9"></circle>
+    </g>
+
+    <!-- Wolk 1 -->
+    <g>
+      <ellipse cx="0" cy="68" rx="55" ry="26" fill="white" opacity="0.92"
+      ></ellipse>
+      <ellipse cx="-38" cy="76" rx="38" ry="21" fill="white" opacity="0.92"
+      ></ellipse>
+      <ellipse cx="38" cy="78" rx="44" ry="20" fill="white" opacity="0.92"
+      ></ellipse>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="-50 0"
+        to="1200 0"
+        dur="38s"
+        repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Wolk 2 -->
+    <g>
+      <ellipse cx="0" cy="48" rx="65" ry="25" fill="white" opacity="0.85"
+      ></ellipse>
+      <ellipse cx="-45" cy="58" rx="45" ry="20" fill="white" opacity="0.85"
+      ></ellipse>
+      <ellipse cx="50" cy="60" rx="48" ry="18" fill="white" opacity="0.85"
+      ></ellipse>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="350 0"
+        to="1600 0"
+        dur="52s"
+        repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Wolk 3 -->
+    <g>
+      <ellipse cx="0" cy="88" rx="48" ry="22" fill="white" opacity="0.8"
+      ></ellipse>
+      <ellipse cx="-35" cy="96" rx="32" ry="17" fill="white" opacity="0.8"
+      ></ellipse>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="-200 0"
+        to="1100 0"
+        dur="64s"
+        repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Wolk 4 -->
+    <g>
+      <ellipse cx="0" cy="42" rx="38" ry="17" fill="white" opacity="0.72"
+      ></ellipse>
+      <ellipse cx="-26" cy="50" rx="28" ry="14" fill="white" opacity="0.72"
+      ></ellipse>
+      <ellipse cx="28" cy="50" rx="30" ry="13" fill="white" opacity="0.72"
+      ></ellipse>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="500 0"
+        to="1700 0"
+        dur="47s"
+        repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Wolk 5 -->
+    <g>
+      <ellipse cx="0" cy="72" rx="52" ry="21" fill="white" opacity="0.78"
+      ></ellipse>
+      <ellipse cx="-38" cy="80" rx="36" ry="17" fill="white" opacity="0.78"
+      ></ellipse>
+      <ellipse cx="40" cy="82" rx="38" ry="16" fill="white" opacity="0.78"
+      ></ellipse>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="-350 0"
+        to="950 0"
+        dur="58s"
+        repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Wolk 6 -->
+    <g>
+      <ellipse cx="0" cy="58" rx="30" ry="14" fill="white" opacity="0.68"
+      ></ellipse>
+      <ellipse cx="-22" cy="65" rx="22" ry="11" fill="white" opacity="0.68"
+      ></ellipse>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="750 0"
+        to="2000 0"
+        dur="72s"
+        repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Verre heuvels -->
+    <ellipse cx="220" cy="215" rx="290" ry="110" fill="#A5D6A7" opacity="0.35"
+    ></ellipse>
+    <ellipse cx="760" cy="220" rx="260" ry="100" fill="#81C784" opacity="0.30"
+    ></ellipse>
+
+    <!-- Gras -->
+    <rect x="0" y="215" width="1000" height="85" fill="url(#gras)"></rect>
+
+    <!-- Bloempjes -->
+    <circle cx="105" cy="228" r="3" fill="#FFF176"></circle>
+    <circle cx="195" cy="232" r="2.5" fill="#FF8A80"></circle>
+    <circle cx="310" cy="225" r="3" fill="white"></circle>
+    <circle cx="440" cy="230" r="2.5" fill="#FFF176"></circle>
+    <circle cx="560" cy="226" r="3" fill="#FF8A80"></circle>
+    <circle cx="680" cy="229" r="2.5" fill="white"></circle>
+    <circle cx="800" cy="227" r="3" fill="#FFF176"></circle>
+    <circle cx="880" cy="231" r="2.5" fill="#FF8A80"></circle>
+
+    <!-- Weg -->
+    <rect x="0" y="238" width="1000" height="52" fill="url(#weg)"></rect>
+    <rect x="0" y="238" width="1000" height="1.5" fill="#E0E0E0"></rect>
+    <rect x="0" y="289" width="1000" height="1.5" fill="#757575"></rect>
+
+    <!-- Wegstrepen -->
+    <rect
+      x="0"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="105"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="210"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="315"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="420"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="525"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="630"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="735"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="840"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+    <rect
+      x="945"
+      y="262"
+      width="68"
+      height="5"
+      fill="white"
+      opacity="0.75"
+      rx="2.5"></rect>
+
+    <!-- Bomen -->
+    <g transform="translate(120, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 3 0 0; 0 0 0; -3 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="3.5s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-4"
+          y="-52"
+          width="8"
+          height="52"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-63"
+          rx="22"
+          ry="28"
+          fill="#2E7D32"></ellipse><ellipse
+          cx="0"
+          cy="-69"
+          rx="16"
+          ry="18"
+          fill="#388E3C"></ellipse></g
+      ></g
+    >
+    <g transform="translate(210, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 2.5 0 0; 0 0 0; -2.5 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="4.0s"
+          begin="-1.5s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-3"
+          y="-44"
+          width="6"
+          height="44"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-55"
+          rx="19"
+          ry="24"
+          fill="#2E7D32"></ellipse><ellipse
+          cx="0"
+          cy="-61"
+          rx="13"
+          ry="15"
+          fill="#388E3C"></ellipse></g
+      ></g
+    >
+    <g transform="translate(380, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 3 0 0; 0 0 0; -3 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="5.0s"
+          begin="-2.0s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-4"
+          y="-49"
+          width="8"
+          height="49"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-60"
+          rx="20"
+          ry="26"
+          fill="#1B5E20"></ellipse><ellipse
+          cx="0"
+          cy="-66"
+          rx="14"
+          ry="17"
+          fill="#2E7D32"></ellipse></g
+      ></g
+    >
+    <g transform="translate(460, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 3 0 0; 0 0 0; -3 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="3.8s"
+          begin="-0.8s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-4"
+          y="-50"
+          width="8"
+          height="50"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-61"
+          rx="21"
+          ry="27"
+          fill="#2E7D32"></ellipse><ellipse
+          cx="0"
+          cy="-67"
+          rx="15"
+          ry="18"
+          fill="#388E3C"></ellipse></g
+      ></g
+    >
+    <g transform="translate(610, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 3 0 0; 0 0 0; -3 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="4.5s"
+          begin="-1.2s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-4"
+          y="-51"
+          width="8"
+          height="51"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-62"
+          rx="21"
+          ry="27"
+          fill="#2E7D32"></ellipse><ellipse
+          cx="0"
+          cy="-68"
+          rx="15"
+          ry="18"
+          fill="#388E3C"></ellipse></g
+      ></g
+    >
+    <g transform="translate(690, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 2.5 0 0; 0 0 0; -2.5 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="5.5s"
+          begin="-2.8s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-3"
+          y="-44"
+          width="6"
+          height="44"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-55"
+          rx="18"
+          ry="23"
+          fill="#1B5E20"></ellipse><ellipse
+          cx="0"
+          cy="-61"
+          rx="12"
+          ry="14"
+          fill="#2E7D32"></ellipse></g
+      ></g
+    >
+    <g transform="translate(842, 227)"
+      ><g
+        ><animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="0 0 0; 3 0 0; 0 0 0; -3 0 0; 0 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="4.2s"
+          begin="-0.5s"
+          repeatCount="indefinite"></animateTransform><rect
+          x="-4"
+          y="-48"
+          width="8"
+          height="48"
+          fill="#5D4037"></rect><ellipse
+          cx="0"
+          cy="-59"
+          rx="19"
+          ry="25"
+          fill="#1B5E20"></ellipse><ellipse
+          cx="0"
+          cy="-64"
+          rx="13"
+          ry="16"
+          fill="#2E7D32"></ellipse></g
+      ></g
+    >
+
+    <!-- START bordje -->
+    <g transform="translate(63, 238)">
+      <rect x="-2" y="-130" width="4" height="130" fill="#424242"></rect>
+      <rect
+        x="-25"
+        y="-153"
+        width="50"
+        height="25"
+        rx="4"
+        fill="#4CAF50"
+        stroke="#2E7D32"
+        stroke-width="1.5"></rect>
+      <text
+        x="0"
+        y="-136"
+        font-size="12"
+        fill="white"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">€ 0</text
+      >
+    </g>
+
+    <!-- Startstreep -->
+    <rect x="57" y="238" width="5" height="52" fill="white" opacity="0.9"
+    ></rect>
+    <rect x="66" y="238" width="5" height="52" fill="white" opacity="0.9"
+    ></rect>
+
+    <!-- € 250 mijlpaal -->
+    <g transform="translate(289, 238)">
+      <rect x="-2" y="-130" width="4" height="130" fill="#757575"></rect>
+      <rect
+        x="-29"
+        y="-153"
+        width="58"
+        height="25"
+        rx="4"
+        fill="#FDD835"
+        stroke="#F9A825"
+        stroke-width="1.5"></rect>
+      <text
+        x="0"
+        y="-136"
+        font-size="12"
+        fill="#333"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">€ 250</text
+      >
+    </g>
+
+    <!-- € 500 mijlpaal -->
+    <g transform="translate(514, 238)">
+      <rect x="-2" y="-130" width="4" height="130" fill="#757575"></rect>
+      <rect
+        x="-29"
+        y="-153"
+        width="58"
+        height="25"
+        rx="4"
+        fill="#FF6B35"
+        stroke="#E55A2B"
+        stroke-width="1.5"></rect>
+      <text
+        x="0"
+        y="-136"
+        font-size="12"
+        fill="white"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">€ 500</text
+      >
+    </g>
+
+    <!-- € 750 mijlpaal -->
+    <g transform="translate(740, 238)">
+      <rect x="-2" y="-130" width="4" height="130" fill="#757575"></rect>
+      <rect
+        x="-29"
+        y="-153"
+        width="58"
+        height="25"
+        rx="4"
+        fill="#FDD835"
+        stroke="#F9A825"
+        stroke-width="1.5"></rect>
+      <text
+        x="0"
+        y="-136"
+        font-size="12"
+        fill="#333"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">€ 750</text
+      >
+    </g>
+
+    <!-- FINISH bordje -->
+    <g transform="translate(952, 238)">
+      <rect x="-2" y="-130" width="4" height="130" fill="#424242"></rect>
+      <rect
+        x="-33"
+        y="-155"
+        width="66"
+        height="27"
+        rx="4"
+        fill="#00C4B4"
+        stroke="#007B6E"
+        stroke-width="2"></rect>
+      <text
+        x="0"
+        y="-137"
+        font-size="13"
+        fill="white"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">€ 1000</text
+      >
+    </g>
+
+    <!-- Slinger -->
+    <g transform="translate(0, 10)">
+      <path
+        d="M 740,113 Q 857,126 952,113"
+        stroke="#666"
+        stroke-width="1.5"
+        fill="none"></path>
+      <g transform="translate(-8, 0)"
+        ><polygon points="770,114 781,114 775,130" fill="#FF6B35"></polygon></g
+      >
+      <g transform="translate(-6, 0)"
+        ><polygon points="797,117 808,117 802,133" fill="#FFD700"></polygon></g
+      >
+      <g transform="translate(-5, 0)"
+        ><polygon points="824,119 835,119 829,135" fill="#00C4B4"></polygon></g
+      >
+      <g transform="translate(-3, 0)"
+        ><polygon points="851,120 862,120 856,136" fill="#FF69B4"></polygon></g
+      >
+      <g transform="translate(-2, 0)"
+        ><polygon points="878,119 889,119 883,135" fill="#FF6B35"></polygon></g
+      >
+      <g transform="translate(-1, 0)"
+        ><polygon points="905,117 916,117 910,133" fill="#FFD700"></polygon></g
+      >
+      <polygon points="932,114 943,114 937,130" fill="#00C4B4"></polygon>
+    </g>
+
+    <!-- Finish streep -->
+    <rect x="940" y="238" width="9" height="9" fill="#222"></rect><rect
+      x="949"
+      y="238"
+      width="9"
+      height="9"
+      fill="white"></rect><rect x="958" y="238" width="9" height="9" fill="#222"
+    ></rect>
+    <rect x="940" y="247" width="9" height="9" fill="white"></rect><rect
+      x="949"
+      y="247"
+      width="9"
+      height="9"
+      fill="#222"></rect><rect x="958" y="247" width="9" height="9" fill="white"
+    ></rect>
+    <rect x="940" y="256" width="9" height="9" fill="#222"></rect><rect
+      x="949"
+      y="256"
+      width="9"
+      height="9"
+      fill="white"></rect><rect x="958" y="256" width="9" height="9" fill="#222"
+    ></rect>
+    <rect x="940" y="265" width="9" height="9" fill="white"></rect><rect
+      x="949"
+      y="265"
+      width="9"
+      height="9"
+      fill="#222"></rect><rect x="958" y="265" width="9" height="9" fill="white"
+    ></rect>
+    <rect x="940" y="274" width="9" height="9" fill="#222"></rect><rect
+      x="949"
+      y="274"
+      width="9"
+      height="9"
+      fill="white"></rect><rect x="958" y="274" width="9" height="9" fill="#222"
+    ></rect>
+    <rect x="940" y="283" width="9" height="9" fill="white"></rect><rect
+      x="949"
+      y="283"
+      width="9"
+      height="9"
+      fill="#222"></rect><rect x="958" y="283" width="9" height="9" fill="white"
+    ></rect>
+
+    <!-- Trofee -->
+    <g transform="translate(953, 238)">
+      <rect x="-22" y="-8" width="44" height="8" fill="#B8860B" rx="2"></rect>
+      <rect x="-15" y="-15" width="30" height="7" fill="#DAA520" rx="1"></rect>
+      <rect x="-5" y="-22" width="10" height="7" fill="#B8860B"></rect>
+      <path d="M -14,-22 L -28,-68 L 28,-68 L 14,-22 Z" fill="#FFD700"></path>
+      <path
+        d="M -25,-59 C -46,-59 -46,-31 -17,-31"
+        fill="none"
+        stroke="#DAA520"
+        stroke-width="7"
+        stroke-linecap="round"></path>
+      <path
+        d="M 25,-59 C 46,-59 46,-31 17,-31"
+        fill="none"
+        stroke="#DAA520"
+        stroke-width="7"
+        stroke-linecap="round"></path>
+      <path
+        d="M -11,-24 L -22,-64 L -13,-64 L -6,-24 Z"
+        fill="#FFF9C4"
+        opacity="0.45"></path>
+      <rect x="-30" y="-72" width="60" height="6" fill="#DAA520" rx="2"></rect>
+      <text
+        x="0"
+        y="-51"
+        font-size="15"
+        fill="#7B3F00"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">Eva</text
+      >
+      <text
+        x="0"
+        y="-33"
+        font-size="13"
+        fill="#7B3F00"
+        text-anchor="middle"
+        font-weight="bold"
+        font-family="sans-serif">100</text
+      >
+    </g>
+
+    <!-- Eva op de fiets -->
+    <g id="fiets-groep" transform="translate(-68, 243)">
+      <image href="/fietsen.svg" width="400" height="300" x="-127" y="-150" />
+    </g>
+  </svg>
+</div>
+
+<!-- Stats + voortgangsbalk -->
+<div
+  class="mt-5 bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center gap-4"
+>
+  <div class="text-center shrink-0">
+    <div class="text-3xl font-black text-oranje" id="bedrag-getal">—</div>
+    <div
+      class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wide"
+    >
+      van €1000
+    </div>
+  </div>
+  <div class="flex-1">
+    <div class="flex justify-between text-xs font-semibold text-gray-400 mb-2">
+      <span>🚀 Start</span>
+      <span>🏁 Doel</span>
+    </div>
+    <div class="h-5 bg-gray-100 rounded-full overflow-hidden">
+      <div
+        id="fiets-voortgang-balk"
+        class="h-full bg-gradient-to-r from-turkoois to-oranje rounded-full"
+        style="width: 0%"
+      >
+      </div>
+    </div>
+  </div>
+  <div class="text-center shrink-0">
+    <div class="text-3xl font-black text-donker" id="donateurs-getal">—</div>
+    <div
+      class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wide"
+    >
+      donateurs
+    </div>
+  </div>
+</div>
+
+<script>
+  import { haalDonaties, berekenTotaal } from "../lib/donations";
+
+  const DOEL = 1000;
+  const START_X = -68;
+  const EIND_X = 835;
+  const WEG_Y = 243;
+  const MIN_DUUR_S = 5;
+  const MAX_DUUR_S = 10;
+
+  function animeerNaar(element: SVGElement, naarX: number, pct: number) {
+    const vanX = START_X;
+    const duur = (MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct) * 1000;
+    const start = performance.now();
+    element.setAttribute("transform", `translate(${vanX}, ${WEG_Y})`);
+    function stap(nu: number) {
+      const t = Math.min((nu - start) / duur, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      const x = vanX + (naarX - vanX) * ease;
+      element.setAttribute("transform", `translate(${x}, ${WEG_Y})`);
+      if (t < 1) requestAnimationFrame(stap);
+    }
+    setTimeout(() => requestAnimationFrame(stap), 150);
+  }
+
+  async function laadVoortgang() {
+    const donaties = await haalDonaties();
+    const totaal = berekenTotaal(donaties);
+    const pct = Math.min(totaal / DOEL, 1);
+
+    const fiets = document.getElementById("fiets-groep") as SVGElement | null;
+    if (fiets) animeerNaar(fiets, START_X + (EIND_X - START_X) * pct, pct);
+
+    const bedragGetal = document.getElementById("bedrag-getal");
+    if (bedragGetal) {
+      const duur = (MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct) * 1000;
+      const start = performance.now();
+      function tellerStap(nu: number) {
+        const t = Math.min((nu - start) / duur, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        bedragGetal!.textContent = Math.round(totaal * ease).toLocaleString(
+          "nl-NL",
+          { style: "currency", currency: "EUR", maximumFractionDigits: 0 },
+        );
+        if (t < 1) requestAnimationFrame(tellerStap);
+      }
+      setTimeout(() => requestAnimationFrame(tellerStap), 150);
+    }
+
+    const donateursGetal = document.getElementById("donateurs-getal");
+    if (donateursGetal) {
+      const duur = (MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct) * 1000;
+      const start = performance.now();
+      const aantalDonateurs = donaties.length;
+      function donateursStap(nu: number) {
+        const t = Math.min((nu - start) / duur, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        donateursGetal!.textContent = String(
+          Math.round(aantalDonateurs * ease),
+        );
+        if (t < 1) requestAnimationFrame(donateursStap);
+      }
+      setTimeout(() => requestAnimationFrame(donateursStap), 150);
+    }
+
+    const balk = document.getElementById(
+      "fiets-voortgang-balk",
+    ) as HTMLElement | null;
+    if (balk)
+      setTimeout(() => {
+        balk.style.transition = `width ${MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct}s cubic-bezier(0.215, 0.61, 0.355, 1)`;
+        balk.style.width = `${pct * 100}%`;
+      }, 200);
+  }
+
+  function herstart() {
+    const balk = document.getElementById(
+      "fiets-voortgang-balk",
+    ) as HTMLElement | null;
+    if (balk) {
+      balk.style.transition = "none";
+      balk.style.width = "0%";
+    }
+    const fiets = document.getElementById("fiets-groep") as SVGElement | null;
+    if (fiets)
+      fiets.setAttribute("transform", `translate(${START_X}, ${WEG_Y})`);
+    const bedragGetal = document.getElementById("bedrag-getal");
+    if (bedragGetal) bedragGetal.textContent = "—";
+    const donateursGetal = document.getElementById("donateurs-getal");
+    if (donateursGetal) donateursGetal.textContent = "—";
+    laadVoortgang();
+  }
+
+  document.getElementById("herstart-knop")?.addEventListener("click", herstart);
+  laadVoortgang();
+</script>

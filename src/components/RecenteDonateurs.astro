@@ -1,16 +1,16 @@
-<section class="py-16 px-4 bg-donker text-white">
+<section class="py-16 px-4 bg-gradient-to-b from-sky-50 via-blue-50 to-green-50">
   <div class="max-w-4xl mx-auto">
     <h2 class="text-3xl font-black text-center mb-2">
       ❤️ <span class="gradient-tekst">Recente donateurs</span>
     </h2>
-    <p class="text-center text-gray-400 mb-10">Dank jullie wel!</p>
+    <p class="text-center text-gray-500 mb-10">Dank jullie wel!</p>
 
     <div id="donateurs-lijst" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <div class="col-span-full text-center text-gray-500 py-4">Laden…</div>
     </div>
 
     <div class="text-center mt-8">
-      <a href="/donateurs" class="text-turkoois hover:text-teal-300 font-semibold transition-colors">
+      <a href="/donateurs" class="text-turkoois hover:text-teal-500 font-semibold transition-colors">
         Bekijk alle donateurs →
       </a>
     </div>
@@ -33,7 +33,7 @@
 
       if (recente.length === 0) {
         lijst.appendChild(
-          maakEl('p', 'col-span-full text-center text-gray-400', 'Wees de eerste donateur!')
+          maakEl('p', 'col-span-full text-center text-gray-500', 'Wees de eerste donateur!')
         );
         return;
       }
