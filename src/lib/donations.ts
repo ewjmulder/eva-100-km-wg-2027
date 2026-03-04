@@ -19,7 +19,7 @@ export interface Donatie {
   vraag?: string;
   antwoord?: string;
   publiek: boolean;
-  email?: string;
+  contact?: string;
   timestamp?: Timestamp;
 }
 

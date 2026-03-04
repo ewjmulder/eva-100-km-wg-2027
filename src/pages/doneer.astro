@@ -20,22 +20,25 @@ import Layout from '../layouts/Layout.astro';
         <p class="text-gray-600 text-sm">Jouw belofte is geregistreerd. We nemen na de tocht contact op!</p>
       </div>
 
-      <form id="donatie-formulier" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+      <form id="donatie-formulier" class="bg-white rounded-2xl shadow-lg p-8 space-y-6" novalidate>
         <!-- Honeypot: verborgen voor mensen, zichtbaar voor bots -->
         <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
 
         <div>
           <label for="naam" class="block text-sm font-bold text-gray-700 mb-1">Jouw naam *</label>
-          <input type="text" id="naam" required maxlength="100" placeholder="Bijv. Oma Lies"
+          <input type="text" id="naam" maxlength="100" placeholder="Bijv. Simone Biles"
             class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
+          <p id="fout-naam" class="hidden text-red-500 text-sm mt-1">Vul je naam in</p>
         </div>
 
         <div>
-          <label for="email" class="block text-sm font-bold text-gray-700 mb-1">
-            E-mailadres <span class="text-gray-400 font-normal">(optioneel, niet publiek)</span>
-          </label>
-          <input type="email" id="email" placeholder="jouw@email.nl"
+          <label for="contact" class="block text-sm font-bold text-gray-700 mb-1">Contact *</label>
+          <p class="text-sm text-gray-500 mb-2">Hoe kunnen we contact met je opnemen?<br/>
+            <span class="text-gray-400">Wordt niet publiek gedeeld, alleen nodig om na afloop contact met je op te nemen over je donatie.</span>
+          </p>
+          <input type="text" id="contact" maxlength="200" placeholder="Bijv. 06-12345678 of simone@biles.com"
             class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
+          <p id="fout-contact" class="hidden text-red-500 text-sm mt-1">Vul je contactgegevens in</p>
         </div>
 
         <div>
@@ -51,11 +54,12 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div class="flex items-center gap-2">
             <span class="text-gray-500 font-medium">€</span>
-            <input type="number" id="bedrag-per-km" required min="0.01" max="10" step="0.01"
+            <input type="number" id="bedrag-per-km" min="0.01" max="10" step="0.01"
               placeholder="Zelf invoeren"
               class="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
             <span class="text-gray-500 font-medium whitespace-nowrap">/ km</span>
           </div>
+          <p id="fout-bedrag" class="hidden text-red-500 text-sm mt-1">Kies een geldig bedrag (€ 0,01 – € 10,00 per km)</p>
           <p class="text-sm text-gray-400 mt-2">
             = <span id="totaal-preview" class="font-bold text-turkoois">€ 0,00</span> totaal bij 100 km
           </p>
@@ -75,7 +79,7 @@ import Layout from '../layouts/Layout.astro';
             Vraag aan Eva <span class="text-gray-400 font-normal">(optioneel — Eva beantwoordt ze persoonlijk!)</span>
           </label>
           <textarea id="vraag" maxlength="200" rows="2"
-            placeholder="Bijv. Hoe train je voor zo'n lange tocht?"
+            placeholder="Bijv. Wat neem je allemaal mee tijdens de tocht?"
             class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors resize-none"></textarea>
         </div>
 
@@ -156,6 +160,20 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
+  function verbergVeldFout(veldId: string, foutId: string) {
+    const veld = document.getElementById(veldId);
+    const foutEl = document.getElementById(foutId);
+    veld?.classList.remove('border-red-400');
+    foutEl?.classList.add('hidden');
+  }
+
+  // Wis veldfouten zodra de gebruiker begint met typen
+  ['naam', 'contact', 'bedrag-per-km'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', () => {
+      verbergVeldFout(id, `fout-${id}`);
+    });
+  });
+
   document.getElementById('donatie-formulier')?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -164,33 +182,51 @@ import Layout from '../layouts/Layout.astro';
     if (honeypot) return; // Stille spam-blokkering
 
     const knop = document.getElementById('submit-knop') as HTMLButtonElement;
-    const fout = document.getElementById('fout-bericht');
-    if (fout) {
-      fout.classList.add('hidden');
-      fout.textContent = '';
+
+    // Wis alle fouten
+    ['naam', 'contact', 'bedrag-per-km'].forEach(id => verbergVeldFout(id, `fout-${id}`));
+
+    // Valideer verplichte velden
+    const naam = ((document.getElementById('naam') as HTMLInputElement)?.value ?? '').trim();
+    const contact = ((document.getElementById('contact') as HTMLInputElement)?.value ?? '').trim();
+    const bedragInvoer = (document.getElementById('bedrag-per-km') as HTMLInputElement)?.value ?? '';
+    const bedragPerKm = parseFloat(bedragInvoer);
+
+    let heeftFout = false;
+
+    if (!naam) {
+      document.getElementById('naam')?.classList.add('border-red-400');
+      document.getElementById('fout-naam')?.classList.remove('hidden');
+      heeftFout = true;
     }
+
+    if (!contact) {
+      document.getElementById('contact')?.classList.add('border-red-400');
+      document.getElementById('fout-contact')?.classList.remove('hidden');
+      heeftFout = true;
+    }
+
+    if (isNaN(bedragPerKm) || bedragPerKm <= 0 || bedragPerKm > 10) {
+      document.getElementById('bedrag-per-km')?.classList.add('border-red-400');
+      document.getElementById('fout-bedrag')?.classList.remove('hidden');
+      heeftFout = true;
+    }
+
+    if (heeftFout) return;
+
     if (knop) {
       knop.disabled = true;
       knop.textContent = '⏳ Versturen…';
     }
 
     try {
-      const bedragPerKm = parseFloat((document.getElementById('bedrag-per-km') as HTMLInputElement)?.value ?? '');
-      if (isNaN(bedragPerKm) || bedragPerKm <= 0 || bedragPerKm > 10) {
-        throw new Error('Voer een geldig bedrag in (€ 0,01 – € 10,00 per km)');
-      }
-
-      const naam = ((document.getElementById('naam') as HTMLInputElement)?.value ?? '').trim();
-      if (!naam) throw new Error('Vul je naam in');
-
-      const email = ((document.getElementById('email') as HTMLInputElement)?.value ?? '').trim();
       const berichtWaarde = ((document.getElementById('bericht') as HTMLTextAreaElement)?.value ?? '').trim();
       const vraagWaarde = ((document.getElementById('vraag') as HTMLTextAreaElement)?.value ?? '').trim();
       const publiek = (document.getElementById('publiek') as HTMLInputElement)?.checked ?? false;
 
       await voegDonatieToe({
         naam,
-        email: email || undefined,
+        contact,
         bedragPerKm,
         bericht: berichtWaarde || undefined,
         vraag: vraagWaarde || undefined,
@@ -202,6 +238,7 @@ import Layout from '../layouts/Layout.astro';
       gooidConfetti();
 
     } catch (err) {
+      const fout = document.getElementById('fout-bericht');
       const bericht = err instanceof Error ? err.message : 'Er ging iets mis. Probeer het opnieuw.';
       if (fout) {
         fout.textContent = bericht; // textContent — geen XSS risico
