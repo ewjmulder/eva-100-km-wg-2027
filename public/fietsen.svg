@@ -95,10 +95,10 @@
 
     <g transform="translate(-24, -35)">
         <g class="l-thigh">
-            <line x1="0" y1="0" x2="0" y2="33" stroke="#1F2A36" stroke-width="7" stroke-linecap="round" />
+            <line x1="0" y1="0" x2="0" y2="33" stroke="#226591" stroke-width="7" stroke-linecap="round" />
             <g transform="translate(0, 33)">
                 <g class="l-shin">
-                    <line x1="0" y1="0" x2="0" y2="31" stroke="#1F2A36" stroke-width="6" stroke-linecap="round" />
+                    <line x1="0" y1="0" x2="0" y2="31" stroke="#226591" stroke-width="6" stroke-linecap="round" />
                     <g transform="translate(0, 31)">
                         <g class="l-foot">
                              <path d="M -5 0 L 10 0 L 10 6 L -5 6 Z" fill="#111" />

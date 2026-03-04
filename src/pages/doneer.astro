@@ -1,136 +1,236 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Doneer" beschrijving="Steun Eva's fietstocht van 100 km met een donatie-belofte per kilometer.">
-  <section class="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+<Layout
+  title="Doneer"
+  beschrijving="Steun Eva's fietstocht van 100 km met een donatie-belofte per kilometer."
+>
+  <section
+    class="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-50 to-white"
+  >
     <div class="max-w-lg mx-auto">
       <div class="text-center mb-10">
         <div class="text-5xl mb-3">💸</div>
-        <h1 class="text-4xl font-black mb-3"><span class="gradient-tekst">Doneer</span></h1>
+        <h1 class="text-4xl font-black mb-3">
+          <span class="gradient-tekst">Doneer</span>
+        </h1>
         <p class="text-gray-500">
-          Kies een bedrag per kilometer. Bij 100 km wordt dat het totale donatiebedrag.
-          Betaling gaat buiten de website om — we nemen contact op na de tocht!
+          Kies een bedrag per kilometer. Bij 100 km wordt dat het totale
+          donatiebedrag. Betaling gaat buiten de website om — we nemen contact
+          op na de tocht!
         </p>
       </div>
 
-      <div id="succes-bericht" class="hidden bg-turkoois/10 border border-turkoois rounded-2xl p-6 text-center mb-6">
+      <div
+        id="succes-bericht"
+        class="hidden bg-turkoois/10 border border-turkoois rounded-2xl p-6 text-center mb-6"
+      >
         <div class="text-4xl mb-2">🎉</div>
         <h2 class="text-xl font-black text-turkoois mb-1">Bedankt!</h2>
-        <p class="text-gray-600 text-sm">Jouw belofte is geregistreerd. We nemen na de tocht contact op!</p>
+        <p class="text-gray-600 text-sm">
+          Jouw belofte is geregistreerd. We nemen na de tocht contact op!
+        </p>
       </div>
 
-      <form id="donatie-formulier" class="bg-white rounded-2xl shadow-lg p-8 space-y-6" novalidate>
+      <form
+        id="donatie-formulier"
+        class="bg-white rounded-2xl shadow-lg p-8 space-y-6"
+        novalidate
+      >
         <!-- Honeypot: verborgen voor mensen, zichtbaar voor bots -->
-        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+        <input
+          type="text"
+          name="website"
+          class="hidden"
+          tabindex="-1"
+          autocomplete="off"
+        />
 
         <div>
-          <label for="naam" class="block text-sm font-bold text-gray-700 mb-1">Jouw naam *</label>
-          <input type="text" id="naam" maxlength="100" placeholder="Bijv. Simone Biles"
-            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
-          <p id="fout-naam" class="hidden text-red-500 text-sm mt-1">Vul je naam in</p>
-        </div>
-
-        <div>
-          <label for="contact" class="block text-sm font-bold text-gray-700 mb-1">Contact *</label>
-          <p class="text-sm text-gray-500 mb-2">Hoe kunnen we contact met je opnemen?<br/>
-            <span class="text-gray-400">Wordt niet publiek gedeeld, alleen nodig om na afloop contact met je op te nemen over je donatie.</span>
+          <label for="naam" class="block text-sm font-bold text-gray-700 mb-1"
+            >Jouw naam *</label
+          >
+          <input
+            type="text"
+            id="naam"
+            maxlength="100"
+            placeholder="Bijv. Simone Biles"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
+          />
+          <p id="fout-naam" class="hidden text-red-500 text-sm mt-1">
+            Vul je naam in
           </p>
-          <input type="text" id="contact" maxlength="200" placeholder="Bijv. 06-12345678 of simone@biles.com"
-            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
-          <p id="fout-contact" class="hidden text-red-500 text-sm mt-1">Vul je contactgegevens in</p>
         </div>
 
         <div>
-          <label class="block text-sm font-bold text-gray-700 mb-3">Bedrag per kilometer *</label>
+          <label
+            for="contact"
+            class="block text-sm font-bold text-gray-700 mb-1">Contact *</label
+          >
+          <p class="text-sm text-gray-500 mb-2">
+            Hoe kunnen we contact met je opnemen?<br />
+            <span class="text-gray-400"
+              >Wordt niet publiek gedeeld, alleen nodig om na afloop contact met
+              je op te nemen over je donatie.</span
+            >
+          </p>
+          <input
+            type="text"
+            id="contact"
+            maxlength="200"
+            placeholder="Bijv. 06-12345678 of simone@biles.com"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
+          />
+          <p id="fout-contact" class="hidden text-red-500 text-sm mt-1">
+            Vul je contactgegevens in
+          </p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-3"
+            >Bedrag per kilometer *</label
+          >
           <div class="grid grid-cols-4 gap-2 mb-3">
-            {[0.10, 0.25, 0.50, 1.00].map(bedrag => (
-              <button type="button"
-                class="preset-knop border-2 border-gray-200 rounded-xl py-3 font-bold text-sm hover:border-turkoois hover:text-turkoois transition-all"
-                data-bedrag={String(bedrag)}>
-                € {bedrag.toFixed(2)}
-              </button>
-            ))}
+            {
+              [0.1, 0.25, 0.5, 1.0].map((bedrag) => (
+                <button
+                  type="button"
+                  class="preset-knop border-2 border-gray-200 rounded-xl py-3 font-bold text-sm hover:border-turkoois hover:text-turkoois transition-all"
+                  data-bedrag={String(bedrag)}
+                >
+                  € {bedrag.toFixed(2)}
+                </button>
+              ))
+            }
           </div>
           <div class="flex items-center gap-2">
             <span class="text-gray-500 font-medium">€</span>
-            <input type="number" id="bedrag-per-km" min="0.01" max="10" step="0.01"
+            <input
+              type="number"
+              id="bedrag-per-km"
+              min="0.01"
+              max="10"
+              step="0.01"
               placeholder="Zelf invoeren"
-              class="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors" />
-            <span class="text-gray-500 font-medium whitespace-nowrap">/ km</span>
+              class="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
+            />
+            <span class="text-gray-500 font-medium whitespace-nowrap">/ km</span
+            >
           </div>
-          <p id="fout-bedrag" class="hidden text-red-500 text-sm mt-1">Kies een geldig bedrag (€ 0,01 – € 10,00 per km)</p>
+          <p id="fout-bedrag" class="hidden text-red-500 text-sm mt-1">
+            Kies een geldig bedrag (€ 0,01 – € 10,00 per km)
+          </p>
           <p class="text-sm text-gray-400 mt-2">
-            = <span id="totaal-preview" class="font-bold text-turkoois">€ 0,00</span> totaal bij 100 km
+            = <span id="totaal-preview" class="font-bold text-turkoois"
+              >€ 0,00</span
+            > totaal bij 100 km
           </p>
         </div>
 
         <div>
-          <label for="bericht" class="block text-sm font-bold text-gray-700 mb-1">
-            Bericht <span class="text-gray-400 font-normal">(optioneel, max 200 tekens)</span>
+          <label
+            for="bericht"
+            class="block text-sm font-bold text-gray-700 mb-1"
+          >
+            Bericht <span class="text-gray-400 font-normal"
+              >(optioneel, max 200 tekens)</span
+            >
           </label>
-          <textarea id="bericht" maxlength="200" rows="3"
+          <textarea
+            id="bericht"
+            maxlength="200"
+            rows="3"
             placeholder="Bijv. Succes meid! Je kan het!"
-            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors resize-none"></textarea>
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors resize-none"
+          ></textarea>
         </div>
 
         <div>
           <label for="vraag" class="block text-sm font-bold text-gray-700 mb-1">
-            Vraag aan Eva <span class="text-gray-400 font-normal">(optioneel — Eva beantwoordt ze persoonlijk!)</span>
+            Vraag aan Eva <span class="text-gray-400 font-normal"
+              >(optioneel — Eva beantwoordt ze persoonlijk!)</span
+            >
           </label>
-          <textarea id="vraag" maxlength="200" rows="2"
+          <textarea
+            id="vraag"
+            maxlength="200"
+            rows="2"
             placeholder="Bijv. Wat neem je allemaal mee tijdens de tocht?"
-            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors resize-none"></textarea>
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors resize-none"
+          ></textarea>
         </div>
 
         <div class="flex items-start gap-3">
-          <input type="checkbox" id="publiek" checked class="mt-1 w-4 h-4 accent-turkoois" />
+          <input
+            type="checkbox"
+            id="publiek"
+            checked
+            class="mt-1 w-4 h-4 accent-turkoois"
+          />
           <label for="publiek" class="text-sm text-gray-600">
-            Mijn naam, bericht en vraag mogen publiek zichtbaar zijn op de website
+            Mijn naam, bericht en vraag mogen publiek zichtbaar zijn op de
+            website (zet dit uit voor een anonieme donatie)
           </label>
         </div>
 
-        <button type="submit" id="submit-knop"
-          class="w-full bg-oranje hover:bg-orange-400 text-white font-black text-lg py-4 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-oranje/30">
-          🚴 Beloof mijn donatie!
+        <button
+          type="submit"
+          id="submit-knop"
+          class="w-full bg-oranje hover:bg-orange-400 text-white font-black text-lg py-4 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-oranje/30"
+        >
+          <span class="fiets-rechts">🚴</span> Beloof mijn donatie!
         </button>
 
-        <div id="fout-bericht" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm text-center"></div>
+        <div
+          id="fout-bericht"
+          class="hidden bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm text-center"
+        >
+        </div>
       </form>
     </div>
   </section>
 </Layout>
 
 <script>
-  import { voegDonatieToe } from '../lib/donations';
-  import { formatEuro } from '../lib/dom';
+  import { voegDonatieToe } from "../lib/donations";
+  import { formatEuro } from "../lib/dom";
 
   // Preset knoppen
-  document.querySelectorAll('.preset-knop').forEach(knop => {
-    knop.addEventListener('click', () => {
-      const bedrag = (knop as HTMLElement).dataset.bedrag ?? '';
-      (document.getElementById('bedrag-per-km') as HTMLInputElement).value = bedrag;
-      document.querySelectorAll('.preset-knop').forEach(k =>
-        k.classList.remove('border-turkoois', 'text-turkoois', 'bg-turkoois/5')
-      );
-      knop.classList.add('border-turkoois', 'text-turkoois', 'bg-turkoois/5');
+  document.querySelectorAll(".preset-knop").forEach((knop) => {
+    knop.addEventListener("click", () => {
+      const bedrag = (knop as HTMLElement).dataset.bedrag ?? "";
+      (document.getElementById("bedrag-per-km") as HTMLInputElement).value =
+        bedrag;
+      document
+        .querySelectorAll(".preset-knop")
+        .forEach((k) =>
+          k.classList.remove(
+            "border-turkoois",
+            "text-turkoois",
+            "bg-turkoois/5",
+          ),
+        );
+      knop.classList.add("border-turkoois", "text-turkoois", "bg-turkoois/5");
       updateVooruitkijk();
     });
   });
 
   function updateVooruitkijk() {
-    const invoer = document.getElementById('bedrag-per-km') as HTMLInputElement;
-    const preview = document.getElementById('totaal-preview');
-    const bedrag = parseFloat(invoer?.value ?? '0') || 0;
+    const invoer = document.getElementById("bedrag-per-km") as HTMLInputElement;
+    const preview = document.getElementById("totaal-preview");
+    const bedrag = parseFloat(invoer?.value ?? "0") || 0;
     if (preview) preview.textContent = formatEuro(bedrag * 100);
   }
 
-  document.getElementById('bedrag-per-km')?.addEventListener('input', updateVooruitkijk);
+  document
+    .getElementById("bedrag-per-km")
+    ?.addEventListener("input", updateVooruitkijk);
 
   function gooidConfetti() {
-    const kleuren = ['#00C4B4', '#FF6B35', '#FFD700', '#ffffff'];
+    const kleuren = ["#00C4B4", "#FF6B35", "#FFD700", "#ffffff"];
     for (let i = 0; i < 80; i++) {
-      const stuk = document.createElement('div');
+      const stuk = document.createElement("div");
       const kleur = kleuren[Math.floor(Math.random() * kleuren.length)];
       const isRond = Math.random() > 0.5;
       const duur = 0.8 + Math.random() * 1.5;
@@ -138,116 +238,149 @@ import Layout from '../layouts/Layout.astro';
       const startX = Math.random() * 100;
 
       stuk.style.cssText = [
-        'position:fixed',
-        'width:10px',
-        'height:10px',
+        "position:fixed",
+        "width:10px",
+        "height:10px",
         `background:${kleur}`,
-        `border-radius:${isRond ? '50%' : '2px'}`,
+        `border-radius:${isRond ? "50%" : "2px"}`,
         `left:${startX}vw`,
-        'top:-10px',
-        'z-index:9999',
-        'pointer-events:none',
-      ].join(';');
+        "top:-10px",
+        "z-index:9999",
+        "pointer-events:none",
+      ].join(";");
 
       const animNaam = `confetti-val-${i}-${Date.now()}`;
-      const style = document.createElement('style');
+      const style = document.createElement("style");
       style.textContent = `@keyframes ${animNaam} { to { transform: translateY(110vh) rotate(${rotation}deg); opacity: 0; } }`;
       stuk.style.animation = `${animNaam} ${duur}s ease-in forwards`;
 
       document.head.appendChild(style);
       document.body.appendChild(stuk);
-      setTimeout(() => { stuk.remove(); style.remove(); }, Math.ceil(duur * 1000) + 200);
+      setTimeout(
+        () => {
+          stuk.remove();
+          style.remove();
+        },
+        Math.ceil(duur * 1000) + 200,
+      );
     }
   }
 
   function verbergVeldFout(veldId: string, foutId: string) {
     const veld = document.getElementById(veldId);
     const foutEl = document.getElementById(foutId);
-    veld?.classList.remove('border-red-400');
-    foutEl?.classList.add('hidden');
+    veld?.classList.remove("border-red-400");
+    foutEl?.classList.add("hidden");
   }
 
   // Wis veldfouten zodra de gebruiker begint met typen
-  ['naam', 'contact', 'bedrag-per-km'].forEach(id => {
-    document.getElementById(id)?.addEventListener('input', () => {
+  ["naam", "contact", "bedrag-per-km"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("input", () => {
       verbergVeldFout(id, `fout-${id}`);
     });
   });
 
-  document.getElementById('donatie-formulier')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  document
+    .getElementById("donatie-formulier")
+    ?.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    // Honeypot check
-    const honeypot = (document.querySelector('input[name="website"]') as HTMLInputElement)?.value ?? '';
-    if (honeypot) return; // Stille spam-blokkering
+      // Honeypot check
+      const honeypot =
+        (document.querySelector('input[name="website"]') as HTMLInputElement)
+          ?.value ?? "";
+      if (honeypot) return; // Stille spam-blokkering
 
-    const knop = document.getElementById('submit-knop') as HTMLButtonElement;
+      const knop = document.getElementById("submit-knop") as HTMLButtonElement;
 
-    // Wis alle fouten
-    ['naam', 'contact', 'bedrag-per-km'].forEach(id => verbergVeldFout(id, `fout-${id}`));
+      // Wis alle fouten
+      ["naam", "contact", "bedrag-per-km"].forEach((id) =>
+        verbergVeldFout(id, `fout-${id}`),
+      );
 
-    // Valideer verplichte velden
-    const naam = ((document.getElementById('naam') as HTMLInputElement)?.value ?? '').trim();
-    const contact = ((document.getElementById('contact') as HTMLInputElement)?.value ?? '').trim();
-    const bedragInvoer = (document.getElementById('bedrag-per-km') as HTMLInputElement)?.value ?? '';
-    const bedragPerKm = parseFloat(bedragInvoer);
+      // Valideer verplichte velden
+      const naam = (
+        (document.getElementById("naam") as HTMLInputElement)?.value ?? ""
+      ).trim();
+      const contact = (
+        (document.getElementById("contact") as HTMLInputElement)?.value ?? ""
+      ).trim();
+      const bedragInvoer =
+        (document.getElementById("bedrag-per-km") as HTMLInputElement)?.value ??
+        "";
+      const bedragPerKm = parseFloat(bedragInvoer);
 
-    let heeftFout = false;
+      let heeftFout = false;
 
-    if (!naam) {
-      document.getElementById('naam')?.classList.add('border-red-400');
-      document.getElementById('fout-naam')?.classList.remove('hidden');
-      heeftFout = true;
-    }
-
-    if (!contact) {
-      document.getElementById('contact')?.classList.add('border-red-400');
-      document.getElementById('fout-contact')?.classList.remove('hidden');
-      heeftFout = true;
-    }
-
-    if (isNaN(bedragPerKm) || bedragPerKm <= 0 || bedragPerKm > 10) {
-      document.getElementById('bedrag-per-km')?.classList.add('border-red-400');
-      document.getElementById('fout-bedrag')?.classList.remove('hidden');
-      heeftFout = true;
-    }
-
-    if (heeftFout) return;
-
-    if (knop) {
-      knop.disabled = true;
-      knop.textContent = '⏳ Versturen…';
-    }
-
-    try {
-      const berichtWaarde = ((document.getElementById('bericht') as HTMLTextAreaElement)?.value ?? '').trim();
-      const vraagWaarde = ((document.getElementById('vraag') as HTMLTextAreaElement)?.value ?? '').trim();
-      const publiek = (document.getElementById('publiek') as HTMLInputElement)?.checked ?? false;
-
-      await voegDonatieToe({
-        naam,
-        contact,
-        bedragPerKm,
-        bericht: berichtWaarde || undefined,
-        vraag: vraagWaarde || undefined,
-        publiek,
-      });
-
-      document.getElementById('donatie-formulier')?.classList.add('hidden');
-      document.getElementById('succes-bericht')?.classList.remove('hidden');
-      gooidConfetti();
-
-    } catch (err) {
-      const fout = document.getElementById('fout-bericht');
-      const bericht = err instanceof Error ? err.message : 'Er ging iets mis. Probeer het opnieuw.';
-      if (fout) {
-        fout.textContent = bericht; // textContent — geen XSS risico
-        fout.classList.remove('hidden');
+      if (!naam) {
+        document.getElementById("naam")?.classList.add("border-red-400");
+        document.getElementById("fout-naam")?.classList.remove("hidden");
+        heeftFout = true;
       }
+
+      if (!contact) {
+        document.getElementById("contact")?.classList.add("border-red-400");
+        document.getElementById("fout-contact")?.classList.remove("hidden");
+        heeftFout = true;
+      }
+
+      if (isNaN(bedragPerKm) || bedragPerKm <= 0 || bedragPerKm > 10) {
+        document
+          .getElementById("bedrag-per-km")
+          ?.classList.add("border-red-400");
+        document.getElementById("fout-bedrag")?.classList.remove("hidden");
+        heeftFout = true;
+      }
+
+      if (heeftFout) return;
+
       if (knop) {
-        knop.disabled = false;
-        knop.textContent = '🚴 Beloof mijn donatie!';
+        knop.disabled = true;
+        knop.textContent = "⏳ Versturen…";
       }
-    }
-  });
+
+      try {
+        const berichtWaarde = (
+          (document.getElementById("bericht") as HTMLTextAreaElement)?.value ??
+          ""
+        ).trim();
+        const vraagWaarde = (
+          (document.getElementById("vraag") as HTMLTextAreaElement)?.value ?? ""
+        ).trim();
+        const publiek =
+          (document.getElementById("publiek") as HTMLInputElement)?.checked ??
+          false;
+
+        await voegDonatieToe({
+          naam,
+          contact,
+          bedragPerKm,
+          bericht: berichtWaarde || undefined,
+          vraag: vraagWaarde || undefined,
+          publiek,
+        });
+
+        document.getElementById("donatie-formulier")?.classList.add("hidden");
+        document.getElementById("succes-bericht")?.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        gooidConfetti();
+      } catch (err) {
+        const fout = document.getElementById("fout-bericht");
+        const bericht =
+          err instanceof Error
+            ? err.message
+            : "Er ging iets mis. Probeer het opnieuw.";
+        if (fout) {
+          fout.textContent = bericht; // textContent — geen XSS risico
+          fout.classList.remove("hidden");
+        }
+        if (knop) {
+          knop.disabled = false;
+          const fietsSpan = document.createElement("span");
+          fietsSpan.className = "fiets-rechts";
+          fietsSpan.textContent = "🚴";
+          knop.replaceChildren(fietsSpan, document.createTextNode(" Beloof mijn donatie!"));
+        }
+      }
+    });
 </script>

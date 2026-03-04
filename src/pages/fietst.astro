@@ -13,7 +13,8 @@ import Layout from "../layouts/Layout.astro";
       <!-- Titel -->
       <div class="text-center mb-8">
         <h1 class="text-5xl font-black mb-3">
-          <span class="gradient-tekst">Eva Fietst!</span> 🚴‍♀️
+          <span class="gradient-tekst">Eva Fietst!</span>
+          <span class="fiets-rechts">🚴‍♀️</span>
         </h1>
         <p class="text-gray-500 text-lg">
           Jullie donaties brengen Eva dichter bij de finish.
@@ -21,7 +22,15 @@ import Layout from "../layouts/Layout.astro";
       </div>
 
       <!-- Fietstocht scene -->
-      <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+      <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative">
+        <button
+          id="herstart-knop"
+          class="absolute top-2 left-1/2 -translate-x-1/2 z-10 bg-white/80 hover:bg-white text-gray-400 hover:text-turkoois rounded-full px-3 py-1.5 transition-all shadow-sm text-xs font-semibold flex items-center gap-1.5 leading-none"
+          title="Herstart animatie"
+        >
+          <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 fill-current"><polygon points="1,0.5 9,5 1,9.5"/></svg>
+          Opnieuw
+        </button>
         <svg
           id="tocht-scene"
           viewBox="0 0 1000 300"
@@ -686,7 +695,7 @@ import Layout from "../layouts/Layout.astro";
           </g>
 
           <!-- Eva op de fiets -->
-          <g id="fiets-groep">
+          <g id="fiets-groep" transform="translate(-68, 243)">
             <image
               href="/fietsen.svg"
               width="400"
@@ -698,36 +707,40 @@ import Layout from "../layouts/Layout.astro";
         </svg>
       </div>
 
-      <!-- Km teller -->
-      <div class="mt-5 text-center">
-        <div
-          class="inline-flex items-center gap-3 bg-white rounded-2xl px-8 py-4 shadow-sm border border-gray-100"
-        >
-          <span class="text-4xl font-black text-turkoois" id="km-getal">…</span>
-          <div class="text-left">
-            <div class="font-bold text-donker text-lg leading-none">
-              van de 100 km
-            </div>
-            <div class="text-gray-400 text-sm">virtueel gefietst</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stats -->
-      <div class="grid grid-cols-2 gap-4 mt-4">
-        <div
-          class="bg-white rounded-2xl p-5 text-center shadow-sm border border-gray-100"
-        >
+      <!-- Stats + voortgangsbalk in één rij -->
+      <div
+        class="mt-5 bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center gap-4"
+      >
+        <!-- Euro opgehaald -->
+        <div class="text-center shrink-0">
           <div class="text-3xl font-black text-oranje" id="bedrag-getal">—</div>
           <div
             class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wide"
           >
-            opgehaald van €1.500
+            van €1000
           </div>
         </div>
-        <div
-          class="bg-white rounded-2xl p-5 text-center shadow-sm border border-gray-100"
-        >
+
+        <!-- Voortgangsbalk -->
+        <div class="flex-1">
+          <div
+            class="flex justify-between text-xs font-semibold text-gray-400 mb-2"
+          >
+            <span>🚀 Start</span>
+            <span>🏁 Doel</span>
+          </div>
+          <div class="h-5 bg-gray-100 rounded-full overflow-hidden">
+            <div
+              id="voortgang-balk"
+              class="h-full bg-gradient-to-r from-turkoois to-oranje rounded-full"
+              style="width: 0%"
+            >
+            </div>
+          </div>
+        </div>
+
+        <!-- Donateurs -->
+        <div class="text-center shrink-0">
           <div class="text-3xl font-black text-donker" id="donateurs-getal">
             —
           </div>
@@ -739,40 +752,13 @@ import Layout from "../layouts/Layout.astro";
         </div>
       </div>
 
-      <!-- Voortgangsbalk -->
-      <div
-        class="mt-4 bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
-      >
-        <div
-          class="flex justify-between text-sm font-semibold text-gray-400 mb-3"
-        >
-          <span>🚀 Start</span>
-          <span>🏁 Doel: €1.500</span>
-        </div>
-        <div class="h-5 bg-gray-100 rounded-full overflow-hidden">
-          <div
-            id="voortgang-balk"
-            class="h-full bg-gradient-to-r from-turkoois to-oranje rounded-full"
-            style="width: 0%; transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
-          >
-          </div>
-        </div>
-        <div class="flex justify-between text-xs text-gray-300 mt-2">
-          <span>0 km</span>
-          <span>25 km</span>
-          <span>50 km</span>
-          <span>75 km</span>
-          <span>100 km</span>
-        </div>
-      </div>
-
       <!-- CTA -->
       <div class="mt-8 text-center">
         <a
           href="/doneer"
           class="inline-block bg-gradient-to-r from-turkoois to-oranje text-white font-black px-10 py-4 rounded-full text-xl hover:scale-105 transition-transform shadow-xl"
         >
-          🚴‍♀️ Help Eva verder fietsen
+          <span class="fiets-rechts">🚴‍♀️</span> Help Eva verder fietsen
         </a>
         <p class="text-gray-400 text-sm mt-3">
           Elke euro brengt haar dichter bij de finish
@@ -785,7 +771,7 @@ import Layout from "../layouts/Layout.astro";
 <script>
   import { haalDonaties, berekenTotaal } from "../lib/donations";
 
-  const DOEL = 1500;
+  const DOEL = 1000;
 
   // SVG-coördinaten: fiets rijdt van x=55 (bij startvlag) tot x=920 (bij finishvlag)
   // De fiets-groep origine zit iets in het wegoppervlak (y=243) zodat de wielen
@@ -794,9 +780,12 @@ import Layout from "../layouts/Layout.astro";
   const EIND_X = 835;
   const WEG_Y = 243;
 
-  function animeerNaar(element: SVGElement, naarX: number) {
+  const MIN_DUUR_S = 5; // seconden bij pct = 0
+  const MAX_DUUR_S = 10; // seconden bij pct = 1
+
+  function animeerNaar(element: SVGElement, naarX: number, pct: number) {
     const vanX = START_X;
-    const duur = 2000; // ms
+    const duur = (MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct) * 1000; // ms — 10s bij 100%, lineair schaalbaar
     const start = performance.now();
 
     // Begin altijd bij START_X
@@ -819,40 +808,81 @@ import Layout from "../layouts/Layout.astro";
     const donaties = await haalDonaties();
     const totaal = berekenTotaal(donaties);
     const pct = Math.min(totaal / DOEL, 1);
-    const km = Math.round(pct * 100);
 
     // Fiets bewegen
     const fiets = document.getElementById("fiets-groep") as SVGElement | null;
     if (fiets) {
       const bikeX = START_X + (EIND_X - START_X) * pct;
-      animeerNaar(fiets, bikeX);
+      animeerNaar(fiets, bikeX, pct);
     }
 
-    // Km getal
-    const kmGetal = document.getElementById("km-getal");
-    if (kmGetal) kmGetal.textContent = `${km} km`;
-
-    // Bedrag
+    // Bedrag — loopt op met dezelfde animatiecurve als de fiets
     const bedragGetal = document.getElementById("bedrag-getal");
     if (bedragGetal) {
-      bedragGetal.textContent = totaal.toLocaleString("nl-NL", {
-        style: "currency",
-        currency: "EUR",
-        maximumFractionDigits: 0,
-      });
+      const duur = (MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct) * 1000;
+      const start = performance.now();
+      function tellerStap(nu: number) {
+        const t = Math.min((nu - start) / duur, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const huidig = Math.round(totaal * ease);
+        bedragGetal!.textContent = huidig.toLocaleString("nl-NL", {
+          style: "currency",
+          currency: "EUR",
+          maximumFractionDigits: 0,
+        });
+        if (t < 1) requestAnimationFrame(tellerStap);
+      }
+      setTimeout(() => requestAnimationFrame(tellerStap), 150);
     }
 
-    // Donateurs
+    // Donateurs — loopt op met dezelfde animatiecurve als de fiets
     const donateursGetal = document.getElementById("donateurs-getal");
-    if (donateursGetal) donateursGetal.textContent = String(donaties.length);
+    if (donateursGetal) {
+      const duur = (MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct) * 1000;
+      const start = performance.now();
+      const aantalDonateurs = donaties.length;
+      function donateursStap(nu: number) {
+        const t = Math.min((nu - start) / duur, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        donateursGetal!.textContent = String(
+          Math.round(aantalDonateurs * ease),
+        );
+        if (t < 1) requestAnimationFrame(donateursStap);
+      }
+      setTimeout(() => requestAnimationFrame(donateursStap), 150);
+    }
 
     // Voortgangsbalk (iets vertraagd voor smooth effect)
-    const balk = document.getElementById("voortgang-balk");
+    const balk = document.getElementById(
+      "voortgang-balk",
+    ) as HTMLElement | null;
     if (balk)
       setTimeout(() => {
+        balk.style.transition = `width ${MIN_DUUR_S + (MAX_DUUR_S - MIN_DUUR_S) * pct}s cubic-bezier(0.215, 0.61, 0.355, 1)`;
         balk.style.width = `${pct * 100}%`;
       }, 200);
   }
+
+  function herstart() {
+    // Reset balk zonder transitie zodat de animatie opnieuw zichtbaar is
+    const balk = document.getElementById("voortgang-balk") as HTMLElement | null;
+    if (balk) {
+      balk.style.transition = "none";
+      balk.style.width = "0%";
+    }
+    // Reset fiets naar startpositie
+    const fiets = document.getElementById("fiets-groep") as SVGElement | null;
+    if (fiets) fiets.setAttribute("transform", `translate(${START_X}, ${WEG_Y})`);
+    // Reset tellers
+    const bedragGetal = document.getElementById("bedrag-getal");
+    if (bedragGetal) bedragGetal.textContent = "—";
+    const donateursGetal = document.getElementById("donateurs-getal");
+    if (donateursGetal) donateursGetal.textContent = "—";
+
+    laadVoortgang();
+  }
+
+  document.getElementById("herstart-knop")?.addEventListener("click", herstart);
 
   laadVoortgang();
 </script>

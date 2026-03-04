@@ -28,10 +28,12 @@ export const TOTALE_KM = 100;
 export async function voegDonatieToe(
   donatie: Omit<Donatie, 'id' | 'timestamp'>
 ): Promise<string> {
-  const ref = await addDoc(collection(db, 'donations'), {
-    ...donatie,
-    timestamp: serverTimestamp(),
-  });
+  // Firestore accepteert geen undefined-waarden — filter ze eruit
+  const data = Object.fromEntries(
+    Object.entries({ ...donatie, timestamp: serverTimestamp() })
+      .filter(([, waarde]) => waarde !== undefined)
+  );
+  const ref = await addDoc(collection(db, 'donations'), data);
   return ref.id;
 }
 

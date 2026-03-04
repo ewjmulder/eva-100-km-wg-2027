@@ -3,7 +3,7 @@ const navItems = [
   { href: '/', label: 'Home' },
   { href: '/doneer', label: 'Doneer' },
   { href: '/donateurs', label: 'Donateurs' },
-  { href: '/fietst', label: 'Eva Fietst! 🚴' },
+  { href: '/fietst', label: 'Eva Fietst! <span class="fiets-rechts">🚴</span>' },
   { href: '/vorige-tocht', label: 'Vorige Tocht' },
   { href: '/gymnaestrada', label: 'World Gymnaestrada' },
   { href: '/vragen', label: 'Vragen aan Eva' },
@@ -13,15 +13,14 @@ const huidigPad = Astro.url.pathname;
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="/" class="text-xl font-black gradient-tekst">Eva 🚴 100 km</a>
+    <a href="/" class="text-xl font-black gradient-tekst">Eva <span class="fiets-rechts">🚴</span> 100 km</a>
 
     <ul class="hidden md:flex gap-6 text-sm font-semibold">
       {navItems.map(item => (
         <li>
           <a href={item.href}
-             class={`hover:text-turkoois transition-colors ${huidigPad === item.href ? 'text-turkoois' : 'text-donker'}`}>
-            {item.label}
-          </a>
+             class={`hover:text-turkoois transition-colors ${huidigPad === item.href ? 'text-turkoois' : 'text-donker'}`}
+             set:html={item.label}></a>
         </li>
       ))}
     </ul>
@@ -37,9 +36,8 @@ const huidigPad = Astro.url.pathname;
     <ul class="flex flex-col px-4 py-2">
       {navItems.map(item => (
         <li>
-          <a href={item.href} class="block py-3 font-semibold hover:text-turkoois transition-colors">
-            {item.label}
-          </a>
+          <a href={item.href} class="block py-3 font-semibold hover:text-turkoois transition-colors"
+             set:html={item.label}></a>
         </li>
       ))}
     </ul>

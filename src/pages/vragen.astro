@@ -1,112 +1,136 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const vragen = [
   {
-    vraag: 'Waarom doe je deze fietstocht?',
-    antwoord: 'Deels omdat ik al heel lang wilde fietsen voor elk jaar van mijn leven — dus 10 jaar × 10 km = 100 km. Maar ook om geld in te zamelen zodat onze turngroep naar de Gymnaestrada in Lissabon kan. En ik vind het ook gewoon leuk!',
-    emoji: '🎯',
+    vraag: "Waarom doe je deze fietstocht?",
+    antwoord:
+      "Deels omdat ik al heel lang wilde fietsen voor elk jaar van mijn leven — dus 10 jaar × 10 km = 100 km. Maar ook om geld in te zamelen zodat onze turngroep naar de Gymnaestrada in Lissabon kan. En ik vind het ook gewoon leuk!",
+    emoji: "🎯",
   },
   {
-    vraag: 'Wie ben je eigenlijk?',
-    antwoord: 'Ik ben Eva, tien jaar, groep 8. Ik hou heel erg van turnen en ik speel dwarsfluit. En nu ga ik dus ook 100 km fietsen.',
-    emoji: '👋',
+    vraag: "Wie ben je eigenlijk?",
+    antwoord:
+      "Ik ben Eva, tien jaar, groep 8. Ik hou heel erg van turnen en ik speel dwarsfluit. En nu ga ik dus ook 100 km fietsen.",
+    emoji: "👋",
   },
   {
-    vraag: 'Hoe lang fiets je al en ben je getraind?',
-    antwoord: 'Ik fiets al heel lang — geleerd toen ik een jaar of vier was. Ik train nu op de hometrainer, twee keer per week, en het wordt steeds meer. Eigenlijk begon ik dat vooral om straks naar de middelbare school te kunnen fietsen, maar het komt nu ook goed van pas!',
-    emoji: '🚴',
+    vraag: "Hoe lang fiets je al en ben je getraind?",
+    antwoord:
+      "Ik fiets al heel lang — geleerd toen ik een jaar of vier was. Ik train nu op de hometrainer, twee keer per week, en het wordt steeds meer. Eigenlijk begon ik dat vooral om straks naar de middelbare school te kunnen fietsen, maar het komt nu ook goed van pas!",
+    emoji: '<span class="fiets-rechts">🚴</span>',
   },
   {
-    vraag: 'Ben je niet bang dat je de 100 km niet haalt?',
-    antwoord: 'Wel een beetje. Maar ik wil er niet te veel over nadenken. Als ik er zin in heb en het gaat goed, dan lukt het wel, denk ik. Dus: niet heel erg bang.',
-    emoji: '😅',
+    vraag: "Ben je niet bang dat je de 100 km niet haalt?",
+    antwoord:
+      "Wel een beetje. Maar ik wil er niet te veel over nadenken. Als ik er zin in heb en het gaat goed, dan lukt het wel, denk ik. Dus: niet heel erg bang.",
+    emoji: "😅",
   },
   {
-    vraag: 'Wat doe je als het regent of tegenvalt onderweg?',
-    antwoord: 'Doorfietsen. Gewoon doorfietsen. En dan misschien een liedje bedenken en zingen. Gewoon doorgaan.',
-    emoji: '🌧️',
+    vraag: "Wat doe je als het regent of tegenvalt onderweg?",
+    antwoord:
+      "Doorfietsen. Gewoon doorfietsen. En dan misschien een liedje bedenken en zingen. Gewoon doorgaan.",
+    emoji: "🌧️",
   },
   {
-    vraag: 'Wat eet en drink je tijdens de tocht?',
-    antwoord: 'Fruit, krentenbollen en boterhammen met kaas. Want alles is lekker met kaas. En aan het einde: een ijsje. Dat heb ik verdiend.',
-    emoji: '🧀',
+    vraag: "Wat eet en drink je tijdens de tocht?",
+    antwoord:
+      "Fruit, krentenbollen en boterhammen met kaas. Want alles is lekker met kaas. En aan het einde: een ijsje. Dat heb ik verdiend.",
+    emoji: "🧀",
   },
   {
-    vraag: 'Waarom is de Gymnaestrada zo belangrijk voor jou?',
-    antwoord: 'Het lijkt me gewoon heel cool om met een groep mensen die turnen net zo leuk vinden als ik, naar Portugal te gaan en turners van over de hele wereld te ontmoeten. Het is belangrijk, maar het is eigenlijk vooral heel erg leuk.',
-    emoji: '🤸‍♀️',
+    vraag: "Waarom is de Gymnaestrada zo belangrijk voor jou?",
+    antwoord:
+      "Het lijkt me gewoon heel cool om met een groep mensen die turnen net zo leuk vinden als ik, naar Portugal te gaan en turners van over de hele wereld te ontmoeten. Het is belangrijk, maar het is eigenlijk vooral heel erg leuk.",
+    emoji: "🤸‍♀️",
   },
   {
-    vraag: 'Wat doe je als je aankomt?',
-    antwoord: 'Eerst precies op 100 km stoppen — niet 100,1, gewoon precies 100. Dan van de fiets afstappen, knuffelen met papa, juichen, en ijs gaan eten.',
-    emoji: '🏁',
+    vraag: "Wat doe je als je aankomt?",
+    antwoord:
+      "Eerst precies op 100 km stoppen — niet 100,1, gewoon precies 100. Dan van de fiets afstappen, knuffelen met papa, juichen, en ijs gaan eten.",
+    emoji: "🏁",
   },
 ];
 ---
 
-<Layout title="Vragen aan Eva" beschrijving="Eva beantwoordt de meest gestelde vragen over haar fietstocht van 100 km.">
+<Layout
+  title="Vragen aan Eva"
+  beschrijving="Eva beantwoordt de meest gestelde vragen over haar fietstocht van 100 km."
+>
   <section class="min-h-screen py-20 px-4">
     <div class="max-w-3xl mx-auto">
-
       <div class="text-center mb-12">
         <div class="text-5xl mb-3">💬</div>
-        <h1 class="text-4xl font-black mb-3"><span class="gradient-tekst">Vragen aan Eva</span></h1>
-        <p class="text-gray-500">De meest gestelde vragen — beantwoord door Eva zelf.</p>
+        <h1 class="text-4xl font-black mb-3">
+          <span class="gradient-tekst">Vragen aan Eva</span>
+        </h1>
+        <p class="text-gray-500">
+          De meest gestelde vragen — beantwoord door Eva zelf.
+        </p>
       </div>
 
       <div class="space-y-3" id="vragen-lijst">
-        {vragen.map((item, i) => (
-          <div
-            class="vraag-kaart bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
-            data-index={i}
-          >
-            <button
-              class="vraag-knop w-full flex items-center gap-4 px-6 py-5 text-left hover:bg-gray-50 transition-colors"
-              aria-expanded="false"
+        {
+          vragen.map((item, i) => (
+            <div
+              class="vraag-kaart bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+              data-index={i}
             >
-              <span class="text-2xl flex-shrink-0">{item.emoji}</span>
-              <span class="font-black text-donker flex-1">{item.vraag}</span>
-              <span class="pijl text-gray-400 flex-shrink-0 transition-transform duration-300 text-lg">▾</span>
-            </button>
-            <div class="antwoord-wrapper" style="display: none;">
-              <div class="px-6 pb-5 pl-16 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                {item.antwoord}
+              <button
+                class="vraag-knop w-full flex items-center gap-4 px-6 py-5 text-left hover:bg-gray-50 transition-colors"
+                aria-expanded="false"
+              >
+                <span class="text-2xl flex-shrink-0" set:html={item.emoji}></span>
+                <span class="font-black text-donker flex-1">{item.vraag}</span>
+                <span class="pijl text-gray-400 flex-shrink-0 transition-transform duration-300 text-lg">
+                  ▾
+                </span>
+              </button>
+              <div class="antwoord-wrapper" style="display: none;">
+                <div class="px-6 pb-5 pl-16 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                  {item.antwoord}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
-      <div class="mt-12 bg-gradient-to-r from-turkoois to-oranje rounded-2xl p-6 text-white text-center">
+      <div
+        class="mt-12 bg-gradient-to-r from-turkoois to-oranje rounded-2xl p-6 text-white text-center"
+      >
         <div class="text-2xl mb-2">🙋‍♀️</div>
         <p class="font-black text-lg mb-1">Nog een vraag?</p>
-        <p class="text-white/80 text-sm">Doneer en zet je vraag in het berichtje — Eva leest alles!</p>
-        <a href="/doneer" class="inline-block mt-4 bg-white text-turkoois font-black px-6 py-2 rounded-full hover:scale-105 transition-transform">
+        <p class="text-white/80 text-sm">
+          Doneer en stel je vraag — Eva beantwoordt alles zelf!
+        </p>
+        <a
+          href="/doneer"
+          class="inline-block mt-4 bg-white text-turkoois font-black px-6 py-2 rounded-full hover:scale-105 transition-transform"
+        >
           Doneer & stel een vraag
         </a>
       </div>
-
     </div>
   </section>
 </Layout>
 
 <script>
-  document.querySelectorAll('.vraag-knop').forEach(knop => {
-    knop.addEventListener('click', () => {
-      const kaart = knop.closest('.vraag-kaart') as HTMLElement;
-      const antwoord = kaart.querySelector('.antwoord-wrapper') as HTMLElement;
-      const pijl = knop.querySelector('.pijl') as HTMLElement;
-      const isOpen = knop.getAttribute('aria-expanded') === 'true';
+  document.querySelectorAll(".vraag-knop").forEach((knop) => {
+    knop.addEventListener("click", () => {
+      const kaart = knop.closest(".vraag-kaart") as HTMLElement;
+      const antwoord = kaart.querySelector(".antwoord-wrapper") as HTMLElement;
+      const pijl = knop.querySelector(".pijl") as HTMLElement;
+      const isOpen = knop.getAttribute("aria-expanded") === "true";
 
       if (isOpen) {
-        antwoord.style.display = 'none';
-        knop.setAttribute('aria-expanded', 'false');
-        pijl.style.transform = 'rotate(0deg)';
+        antwoord.style.display = "none";
+        knop.setAttribute("aria-expanded", "false");
+        pijl.style.transform = "rotate(0deg)";
       } else {
-        antwoord.style.display = 'block';
-        knop.setAttribute('aria-expanded', 'true');
-        pijl.style.transform = 'rotate(180deg)';
+        antwoord.style.display = "block";
+        knop.setAttribute("aria-expanded", "true");
+        pijl.style.transform = "rotate(180deg)";
       }
     });
   });

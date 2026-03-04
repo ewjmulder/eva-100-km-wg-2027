@@ -22,4 +22,11 @@
   .gradient-tekst {
     @apply bg-gradient-to-r from-turkoois via-oranje to-geel bg-clip-text text-transparent;
   }
+  .fiets-rechts {
+    display: inline-block;
+    transform: scaleX(-1);
+  }
+  .gradient-tekst .fiets-rechts {
+    color: initial;
+  }
 }
