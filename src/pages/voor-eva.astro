@@ -7,7 +7,9 @@ const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').
 ---
 
 <Layout title="Voor Eva" beschrijving="">
-  <section class="min-h-screen py-20 px-4 bg-gray-50">
+  <section
+    class="min-h-screen py-20 px-4 bg-gradient-to-b from-sky-50 via-blue-50 to-green-50"
+  >
     <div class="max-w-2xl mx-auto">
 
       <!-- Hash verborgen in DOM, nooit de echte PIN -->

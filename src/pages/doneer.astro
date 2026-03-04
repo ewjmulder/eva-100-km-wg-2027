@@ -7,18 +7,19 @@ import Layout from "../layouts/Layout.astro";
   beschrijving="Steun Eva's fietstocht van 100 km met een donatie-belofte per kilometer."
 >
   <section
-    class="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-50 to-white"
+    class="min-h-screen py-20 px-4 bg-gradient-to-b from-sky-50 via-blue-50 to-green-50"
   >
     <div class="max-w-lg mx-auto">
       <div class="text-center mb-10">
-        <div class="text-5xl mb-3">💸</div>
+        <div class="text-5xl mb-3">💶</div>
         <h1 class="text-4xl font-black mb-3">
           <span class="gradient-tekst">Doneer</span>
         </h1>
         <p class="text-gray-500">
-          Kies een bedrag per kilometer. Bij 100 km wordt dat het totale
-          donatiebedrag. Betaling gaat buiten de website om — we nemen contact
-          op na de tocht!
+          Kies een bedrag per kilometer. Als Eva de volle 100 km haalt gaat dat
+          dus x 100, anders x zoveel km als ze gefietst heeft.
+          <br />
+          Betaling gaat buiten de website om — we nemen contact op!
         </p>
       </div>
 
@@ -379,7 +380,10 @@ import Layout from "../layouts/Layout.astro";
           const fietsSpan = document.createElement("span");
           fietsSpan.className = "fiets-rechts";
           fietsSpan.textContent = "🚴";
-          knop.replaceChildren(fietsSpan, document.createTextNode(" Beloof mijn donatie!"));
+          knop.replaceChildren(
+            fietsSpan,
+            document.createTextNode(" Beloof mijn donatie!"),
+          );
         }
       }
     });

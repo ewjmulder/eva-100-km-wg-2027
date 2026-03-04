@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import FietstochtAnimatie from "../components/FietstochtAnimatie.astro";
 import RecenteDonateurs from "../components/RecenteDonateurs.astro";
+
+const FIETSTOCHT_DATUM = "2026-04-12T08:00:00";
+const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
 ---
 
 <Layout title="Eva Fietst 100 km!">
@@ -12,7 +15,7 @@ import RecenteDonateurs from "../components/RecenteDonateurs.astro";
     <div class="max-w-4xl mx-auto">
       <!-- Titel -->
       <div class="mb-8">
-        <div class="grid place-items-center mb-3">
+        <div class="grid place-items-center mb-14">
           <div class="relative inline-flex items-center">
             <div
               class="absolute right-full mr-4 w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-[0_12px_28px_rgba(15,23,42,0.22)]"
@@ -27,7 +30,9 @@ import RecenteDonateurs from "../components/RecenteDonateurs.astro";
             </div>
             <h1 class="text-5xl font-black text-center">
               <span class="gradient-tekst">Eva Fietst!</span>
-              <span class="fiets-rechts">🚴‍♀️</span>
+              <span class="animate-bounce inline-block"
+                ><span class="fiets-rechts inline-block">🚴‍♀️</span></span
+              >
             </h1>
           </div>
         </div>
@@ -42,28 +47,85 @@ import RecenteDonateurs from "../components/RecenteDonateurs.astro";
             target="_blank"
             class="text-blue-500 hover:underline"
             ><strong>World Gymnaestrada 2027</strong></a
-          > in Lissabon, Portugal. Om geld in te zamelen voor de reis, gaat ze in 1
-          dag 100 kilometer fietsen met haar vader Erik. Je kan haar steunen door een
-          bedrag per gereden kilometer te sponseren, alvast bedankt!
+          > in Lissabon, Portugal. Om geld in te zamelen voor de reis, gaat ze in
+          1 dag 100 kilometer fietsen met haar vader Erik. Je kan haar steunen door
+          een bedrag per gereden kilometer te sponseren, alvast bedankt!
         </p>
       </div>
 
       <FietstochtAnimatie />
 
-      <!-- CTA -->
-      <div class="mt-8 text-center">
-        <a
-          href="/doneer"
-          class="inline-block bg-gradient-to-r from-turkoois to-oranje text-white font-black px-10 py-4 rounded-full text-xl hover:scale-105 transition-transform shadow-xl"
+      <!-- CTA + Afteller -->
+      <div class="mt-8 flex flex-col gap-6 md:flex-row md:items-center">
+        <div
+          id="afteller-inline"
+          class="flex justify-center gap-3 md:gap-4"
+          role="timer"
+          aria-label="Aftellen tot de fietstocht"
         >
-          <span class="fiets-rechts">🚴‍♀️</span> Help Eva verder fietsen
-        </a>
-        <p class="text-gray-400 text-sm mt-3">
-          Elke euro brengt haar dichter bij de finish
-        </p>
+          {
+            EENHEDEN.map((eenheid) => (
+              <div class="rounded-xl border border-white/80 bg-white/75 p-3 shadow-sm min-w-[65px] md:min-w-[80px] text-center">
+                <div
+                  class={`text-2xl md:text-3xl font-black text-donker countdown-${eenheid}`}
+                  aria-live="off"
+                >
+                  --
+                </div>
+                <div class="text-xs text-gray-500 mt-1">{eenheid}</div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="text-center md:text-right md:ml-auto">
+          <a
+            href="/doneer"
+            class="inline-block bg-gradient-to-r from-turkoois to-oranje text-white font-black px-10 py-4 rounded-full text-xl hover:scale-105 transition-transform shadow-xl"
+          >
+            <span class="fiets-rechts">🚴‍♀️</span> Help Eva en Unitas naar Lissabon!
+            🤸‍♀️
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <RecenteDonateurs />
 </Layout>
+
+<script define:vars={{ FIETSTOCHT_DATUM }}>
+  const root = document.getElementById("afteller-inline");
+
+  function updateCountdown() {
+    if (!root) return;
+
+    const verschil = new Date(FIETSTOCHT_DATUM).getTime() - Date.now();
+    const elDagen = root.querySelector(".countdown-dagen");
+    const elUur = root.querySelector(".countdown-uur");
+    const elMinuten = root.querySelector(".countdown-minuten");
+    const elSeconden = root.querySelector(".countdown-seconden");
+
+    if (!elDagen || !elUur || !elMinuten || !elSeconden) return;
+
+    if (verschil <= 0) {
+      elDagen.textContent = "🎉";
+      elUur.textContent = "0";
+      elMinuten.textContent = "0";
+      elSeconden.textContent = "0";
+      return;
+    }
+
+    const dag = 1000 * 60 * 60 * 24;
+    const uur = 1000 * 60 * 60;
+    const min = 1000 * 60;
+
+    elDagen.textContent = String(Math.floor(verschil / dag));
+    elUur.textContent = String(Math.floor((verschil % dag) / uur));
+    elMinuten.textContent = String(Math.floor((verschil % uur) / min));
+    elSeconden.textContent = String(Math.floor((verschil % min) / 1000));
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
