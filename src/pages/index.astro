@@ -10,15 +10,15 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
 <Layout title="Eva Fietst 100 km!">
   <!-- ═══ Eva Fietst! sectie (was /fietst pagina) ═══ -->
   <section
-    class="min-h-screen bg-gradient-to-b from-sky-50 via-blue-50 to-green-50 pt-24 pb-16 px-4"
+    class="min-h-screen bg-gradient-to-b from-sky-50 via-blue-50 to-green-50 pt-6 md:pt-24 pb-16 px-4"
   >
     <div class="max-w-4xl mx-auto">
       <!-- Titel -->
       <div class="mb-8">
-        <div class="grid place-items-center mb-14">
-          <div class="relative inline-flex items-center">
+        <div class="grid place-items-center mb-6 md:mb-14">
+          <div class="flex flex-col items-center gap-4 md:relative md:inline-flex md:flex-row md:gap-0">
             <div
-              class="absolute right-full mr-4 w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-[0_12px_28px_rgba(15,23,42,0.22)]"
+              class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-[0_12px_28px_rgba(15,23,42,0.22)] md:absolute md:right-full md:mr-4"
             >
               <img
                 src="/images/Eva.webp"
@@ -47,13 +47,19 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
             target="_blank"
             class="text-blue-500 hover:underline"
             ><strong>World Gymnaestrada 2027</strong></a
-          > in Lissabon, Portugal. Om geld in te zamelen voor de reis, gaat ze in
+          > in Lissabon, Portugal.<span class="hidden md:inline"> Om geld in te zamelen voor de reis, gaat ze in
           1 dag 100 kilometer fietsen met haar vader Erik. Je kan haar steunen door
-          een bedrag per gereden kilometer te sponseren, alvast bedankt!
+          een bedrag per gereden kilometer te sponseren, alvast bedankt!</span>
         </p>
       </div>
 
       <FietstochtAnimatie />
+
+      <p class="md:hidden text-gray-500 text-lg text-center mt-5">
+        Om geld in te zamelen voor de reis, gaat ze in
+        1 dag 100 kilometer fietsen met haar vader Erik. Je kan haar steunen door
+        een bedrag per gereden kilometer te sponseren, alvast bedankt!
+      </p>
 
       <!-- CTA + Afteller -->
       <div class="mt-8 flex flex-col gap-6 md:flex-row md:items-center">
