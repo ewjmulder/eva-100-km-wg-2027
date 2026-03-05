@@ -1,17 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Donateurs" beschrijving="Bekijk alle donateurs die Eva's fietstocht sponsoren.">
+<Layout
+  title="Donateurs"
+  beschrijving="Bekijk alle donateurs die Eva's fietstocht sponsoren."
+>
   <section class="min-h-screen py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-12">
         <div class="text-5xl mb-3">🏅</div>
-        <h1 class="text-4xl font-black mb-3"><span class="gradient-tekst">Alle donateurs</span></h1>
-        <p class="text-gray-500">Iedereen die Eva steunt op weg naar Lissabon. Dankjewel!</p>
+        <h1 class="text-4xl font-black mb-3">
+          <span class="gradient-tekst">Alle donateurs</span>
+        </h1>
+        <p class="text-gray-500">
+          Iedereen die Eva steunt op weg naar Lissabon. Dankjewel!
+        </p>
       </div>
 
-      <div class="bg-gradient-to-r from-turkoois to-oranje rounded-2xl p-6 text-white text-center mb-10">
+      <div
+        class="bg-gradient-to-r from-turkoois to-oranje rounded-2xl p-6 text-white text-center mb-10"
+      >
         <div class="text-4xl font-black" id="totaal-display">€ …</div>
         <div class="text-white/80 mt-1" id="donateurs-teller">…</div>
       </div>
@@ -19,25 +28,35 @@ import Layout from '../layouts/Layout.astro';
       <div id="donateurs-grid" class="grid gap-4 md:grid-cols-2">
         <div class="col-span-full text-center text-gray-400 py-8">Laden…</div>
       </div>
+
+      <div class="text-center mt-10">
+        <a
+          href="/doneer"
+          class="inline-block bg-gradient-to-r from-turkoois to-oranje text-white font-black px-10 py-4 rounded-full text-xl hover:scale-105 transition-transform shadow-xl"
+        >
+          <span class="fiets-rechts">🚴‍♀️</span> Word ook donateur! 🤸‍♀️
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
 
 <script>
-  import { haalDonaties, berekenTotaal } from '../lib/donations';
-  import { maakDonateurKaartje, maakEl, formatEuro } from '../lib/dom';
+  import { haalDonaties, berekenTotaal } from "../lib/donations";
+  import { maakDonateurKaartje, maakEl, formatEuro } from "../lib/dom";
 
   async function laadDonateurs() {
-    const grid = document.getElementById('donateurs-grid');
+    const grid = document.getElementById("donateurs-grid");
     if (!grid) return;
 
     try {
       const donaties = await haalDonaties();
       const totaal = berekenTotaal(donaties);
-      const aantalTekst = donaties.length + ' donateur' + (donaties.length !== 1 ? 's' : '');
+      const aantalTekst =
+        donaties.length + " donateur" + (donaties.length !== 1 ? "s" : "");
 
-      const elTotaal = document.getElementById('totaal-display');
-      const elTeller = document.getElementById('donateurs-teller');
+      const elTotaal = document.getElementById("totaal-display");
+      const elTeller = document.getElementById("donateurs-teller");
       if (elTotaal) elTotaal.textContent = formatEuro(totaal);
       if (elTeller) elTeller.textContent = aantalTekst;
 
@@ -45,17 +64,24 @@ import Layout from '../layouts/Layout.astro';
 
       if (donaties.length === 0) {
         grid.appendChild(
-          maakEl('p', 'col-span-full text-center text-gray-400 py-8', 'Nog geen donateurs. Wees de eerste!')
+          maakEl(
+            "p",
+            "col-span-full text-center text-gray-400 py-8",
+            "Nog geen donateurs. Wees de eerste!",
+          ),
         );
         return;
       }
 
-      donaties.forEach(d => grid.appendChild(maakDonateurKaartje(d)));
-
+      donaties.forEach((d) => grid.appendChild(maakDonateurKaartje(d)));
     } catch (e) {
-      console.error('Fout bij laden donateurs:', e);
+      console.error("Fout bij laden donateurs:", e);
       grid.replaceChildren(
-        maakEl('p', 'col-span-full text-center text-red-400 py-8', 'Kon donateurs niet laden.')
+        maakEl(
+          "p",
+          "col-span-full text-center text-red-400 py-8",
+          "Kon donateurs niet laden.",
+        ),
       );
     }
   }

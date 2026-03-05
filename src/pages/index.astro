@@ -16,15 +16,18 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
       <!-- Titel -->
       <div class="mb-8">
         <div class="grid place-items-center mb-6 md:mb-14">
-          <div class="flex flex-col items-center gap-4 md:relative md:inline-flex md:flex-row md:gap-0">
+          <div
+            class="flex flex-col items-center gap-4 md:relative md:inline-flex md:flex-row md:gap-0"
+          >
             <div
               class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-[0_12px_28px_rgba(15,23,42,0.22)] md:absolute md:right-full md:mr-4"
             >
               <img
-                src="/images/Eva.webp"
+                src="/media/Eva.webp"
                 alt="Eva"
                 class="w-full h-full object-cover"
-                loading="eager"
+                width="128"
+                height="128"
                 decoding="async"
               />
             </div>
@@ -40,25 +43,29 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
           Eva (10) is turnster bij <a
             href="https://www.unitasdoorn.nl/"
             target="_blank"
+            rel="noopener noreferrer"
             class="text-blue-500 hover:underline"
             ><strong>Unitas in Doorn</strong></a
           > en droomt ervan om mee te doen aan de <a
             href="https://www.ginastica.org/wg2027"
             target="_blank"
+            rel="noopener noreferrer"
             class="text-blue-500 hover:underline"
             ><strong>World Gymnaestrada 2027</strong></a
-          > in Lissabon, Portugal.<span class="hidden md:inline"> Om geld in te zamelen voor de reis, gaat ze in
-          1 dag 100 kilometer fietsen met haar vader Erik. Je kan haar steunen door
-          een bedrag per gereden kilometer te sponseren, alvast bedankt!</span>
+          > in Lissabon, Portugal.<span class="hidden md:inline">
+            Om geld in te zamelen voor de reis, gaat ze in 1 dag 100 kilometer
+            fietsen met haar vader Erik. Je kan haar steunen door een bedrag per
+            gereden kilometer te sponsoren, alvast bedankt!</span
+          >
         </p>
       </div>
 
       <FietstochtAnimatie />
 
       <p class="md:hidden text-gray-500 text-lg text-center mt-5">
-        Om geld in te zamelen voor de reis, gaat ze in
-        1 dag 100 kilometer fietsen met haar vader Erik. Je kan haar steunen door
-        een bedrag per gereden kilometer te sponseren, alvast bedankt!
+        Om geld in te zamelen voor de reis, gaat ze in 1 dag 100 kilometer
+        fietsen met haar vader Erik. Je kan haar steunen door een bedrag per
+        gereden kilometer te sponsoren, alvast bedankt!
       </p>
 
       <!-- CTA + Afteller -->
@@ -68,6 +75,7 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
           class="flex justify-center gap-3 md:gap-4"
           role="timer"
           aria-label="Aftellen tot de fietstocht"
+          data-datum={FIETSTOCHT_DATUM}
         >
           {
             EENHEDEN.map((eenheid) => (
@@ -98,10 +106,20 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
   </section>
 
   <RecenteDonateurs />
+
+  <div class="text-center py-10 px-4">
+    <a
+      href="/doneer"
+      class="inline-block bg-gradient-to-r from-turkoois to-oranje text-white font-black px-10 py-4 rounded-full text-xl hover:scale-105 transition-transform shadow-xl"
+    >
+      Word ook donateur!
+    </a>
+  </div>
 </Layout>
 
-<script define:vars={{ FIETSTOCHT_DATUM }}>
+<script>
   const root = document.getElementById("afteller-inline");
+  const FIETSTOCHT_DATUM = root?.dataset.datum ?? "";
 
   function updateCountdown() {
     if (!root) return;
@@ -133,5 +151,14 @@ const EENHEDEN = ["dagen", "uur", "minuten", "seconden"];
   }
 
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+  let interval = setInterval(updateCountdown, 1000);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      clearInterval(interval);
+    } else {
+      updateCountdown();
+      interval = setInterval(updateCountdown, 1000);
+    }
+  });
 </script>

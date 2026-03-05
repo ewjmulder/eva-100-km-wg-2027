@@ -4,20 +4,23 @@
 >
   <button
     id="herstart-knop"
-    class="absolute top-2 left-1/2 -translate-x-1/2 z-10 bg-white/80 hover:bg-white text-gray-400 hover:text-turkoois rounded-full px-3 py-1.5 transition-all shadow-sm text-xs font-semibold flex items-center gap-1.5 leading-none"
+    class="absolute z-10 bg-white/80 hover:bg-white text-gray-400 hover:text-turkoois rounded-full transition-all shadow-sm flex items-center leading-none top-2 left-1/2 -translate-x-1/2 sm:top-2 sm:left-1/2 sm:-translate-x-1/2 max-sm:top-1 max-sm:left-2 max-sm:translate-x-0 px-3 py-1.5 text-xs font-semibold gap-1.5 max-sm:px-1.5 max-sm:py-1.5"
     title="Herstart animatie"
   >
-    <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 fill-current"
+    <svg viewBox="0 0 10 10" class="fill-current w-2.5 h-2.5 max-sm:w-2 max-sm:h-2"
       ><polygon points="1,0.5 9,5 1,9.5"></polygon></svg
     >
-    Opnieuw
+    <span class="max-sm:hidden">Opnieuw</span>
   </button>
   <svg
     id="tocht-scene"
     viewBox="0 0 1000 300"
     xmlns="http://www.w3.org/2000/svg"
     class="w-full block"
+    role="img"
+    aria-labelledby="animatie-titel"
   >
+    <title id="animatie-titel">Animatie van Eva op de fiets, onderweg naar het doelbedrag</title>
     <defs>
       <linearGradient id="lucht" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#42A5F5"></stop>
@@ -30,6 +33,10 @@
       <linearGradient id="weg" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#BDBDBD"></stop>
         <stop offset="100%" stop-color="#9E9E9E"></stop>
+      </linearGradient>
+      <linearGradient id="vogelLijf" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4b5563"></stop>
+        <stop offset="100%" stop-color="#1f2937"></stop>
       </linearGradient>
     </defs>
 
@@ -155,6 +162,314 @@
         to="2000 0"
         dur="72s"
         repeatCount="indefinite"></animateTransform>
+    </g>
+
+    <!-- Vogels (vliegen boven de bordjes) -->
+
+    <!-- Vogel 1: medium formaat -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-700 52;1700 44"
+        dur="18s"
+        begin="-3s"
+        repeatCount="indefinite"></animateTransform>
+      <g transform="scale(0.52)">
+        <animateTransform
+          attributeName="transform"
+          additive="sum"
+          type="translate"
+          values="0 0;0 -3;0 0;0 3;0 0"
+          dur="0.75s"
+          repeatCount="indefinite"></animateTransform>
+        <g opacity="0.45">
+          <path d="M6 -6 C34 -26 60 -24 76 -8 C56 -2 34 2 10 4 Z" fill="#9ca3af"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-8 10 -6;26 10 -6;-8 10 -6"
+            dur="0.6s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <g>
+          <polygon points="-46,-5 -84,-16 -76,0 -84,16 -46,8" fill="#111827"></polygon>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="2 -46 0;-5 -46 0;2 -46 0"
+            dur="0.6s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <ellipse cx="0" cy="0" rx="48" ry="23" fill="url(#vogelLijf)"></ellipse>
+        <circle cx="42" cy="-17" r="14" fill="#374151"></circle>
+        <circle cx="46" cy="-20" r="2.2" fill="#f9fafb"></circle>
+        <polygon points="56,-20 84,-14 56,-9" fill="#f59e0b"></polygon>
+        <g>
+          <path d="M-4 -6 C-30 -30 -62 -28 -78 -10 C-56 -2 -32 4 -6 6 Z" fill="#6b7280"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 -4 -6;-22 -4 -6;14 -4 -6"
+            dur="0.6s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+      </g>
+    </g>
+
+    <!-- Vogel 2: klein formaat -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-800 28;1800 23"
+        dur="28s"
+        begin="-20s"
+        repeatCount="indefinite"></animateTransform>
+      <g transform="scale(0.34)">
+        <animateTransform
+          attributeName="transform"
+          additive="sum"
+          type="translate"
+          values="0 0;0 -3;0 0;0 3;0 0"
+          dur="0.8s"
+          repeatCount="indefinite"></animateTransform>
+        <g opacity="0.45">
+          <path d="M6 -6 C34 -26 60 -24 76 -8 C56 -2 34 2 10 4 Z" fill="#9ca3af"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-8 10 -6;26 10 -6;-8 10 -6"
+            dur="0.65s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <g>
+          <polygon points="-46,-5 -84,-16 -76,0 -84,16 -46,8" fill="#111827"></polygon>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="2 -46 0;-5 -46 0;2 -46 0"
+            dur="0.65s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <ellipse cx="0" cy="0" rx="48" ry="23" fill="url(#vogelLijf)"></ellipse>
+        <circle cx="42" cy="-17" r="14" fill="#374151"></circle>
+        <circle cx="46" cy="-20" r="2.2" fill="#f9fafb"></circle>
+        <polygon points="56,-20 84,-14 56,-9" fill="#f59e0b"></polygon>
+        <g>
+          <path d="M-4 -6 C-30 -30 -62 -28 -78 -10 C-56 -2 -32 4 -6 6 Z" fill="#6b7280"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 -4 -6;-22 -4 -6;14 -4 -6"
+            dur="0.65s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+      </g>
+    </g>
+
+    <!-- Vogel 3: groot formaat -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-600 68;1600 60"
+        dur="14s"
+        begin="-8s"
+        repeatCount="indefinite"></animateTransform>
+      <g transform="scale(0.50)">
+        <animateTransform
+          attributeName="transform"
+          additive="sum"
+          type="translate"
+          values="0 0;0 -3;0 0;0 3;0 0"
+          dur="0.7s"
+          repeatCount="indefinite"></animateTransform>
+        <g opacity="0.45">
+          <path d="M6 -6 C34 -26 60 -24 76 -8 C56 -2 34 2 10 4 Z" fill="#9ca3af"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-8 10 -6;26 10 -6;-8 10 -6"
+            dur="0.55s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <g>
+          <polygon points="-46,-5 -84,-16 -76,0 -84,16 -46,8" fill="#111827"></polygon>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="2 -46 0;-5 -46 0;2 -46 0"
+            dur="0.55s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <ellipse cx="0" cy="0" rx="48" ry="23" fill="url(#vogelLijf)"></ellipse>
+        <circle cx="42" cy="-17" r="14" fill="#374151"></circle>
+        <circle cx="46" cy="-20" r="2.2" fill="#f9fafb"></circle>
+        <polygon points="56,-20 84,-14 56,-9" fill="#f59e0b"></polygon>
+        <g>
+          <path d="M-4 -6 C-30 -30 -62 -28 -78 -10 C-56 -2 -32 4 -6 6 Z" fill="#6b7280"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 -4 -6;-22 -4 -6;14 -4 -6"
+            dur="0.55s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+      </g>
+    </g>
+
+    <!-- Vogel 4: mid-klein -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-750 40;1750 34"
+        dur="24s"
+        begin="-5s"
+        repeatCount="indefinite"></animateTransform>
+      <g transform="scale(0.42)">
+        <animateTransform
+          attributeName="transform"
+          additive="sum"
+          type="translate"
+          values="0 0;0 -3;0 0;0 3;0 0"
+          dur="0.72s"
+          repeatCount="indefinite"></animateTransform>
+        <g opacity="0.45">
+          <path d="M6 -6 C34 -26 60 -24 76 -8 C56 -2 34 2 10 4 Z" fill="#9ca3af"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-8 10 -6;26 10 -6;-8 10 -6"
+            dur="0.62s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <g>
+          <polygon points="-46,-5 -84,-16 -76,0 -84,16 -46,8" fill="#111827"></polygon>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="2 -46 0;-5 -46 0;2 -46 0"
+            dur="0.62s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <ellipse cx="0" cy="0" rx="48" ry="23" fill="url(#vogelLijf)"></ellipse>
+        <circle cx="42" cy="-17" r="14" fill="#374151"></circle>
+        <circle cx="46" cy="-20" r="2.2" fill="#f9fafb"></circle>
+        <polygon points="56,-20 84,-14 56,-9" fill="#f59e0b"></polygon>
+        <g>
+          <path d="M-4 -6 C-30 -30 -62 -28 -78 -10 C-56 -2 -32 4 -6 6 Z" fill="#6b7280"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 -4 -6;-22 -4 -6;14 -4 -6"
+            dur="0.62s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+      </g>
+    </g>
+
+    <!-- Vogel 5: mid-groot -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-650 62;1650 55"
+        dur="16s"
+        begin="-13s"
+        repeatCount="indefinite"></animateTransform>
+      <g transform="scale(0.45)">
+        <animateTransform
+          attributeName="transform"
+          additive="sum"
+          type="translate"
+          values="0 0;0 -3;0 0;0 3;0 0"
+          dur="0.68s"
+          repeatCount="indefinite"></animateTransform>
+        <g opacity="0.45">
+          <path d="M6 -6 C34 -26 60 -24 76 -8 C56 -2 34 2 10 4 Z" fill="#9ca3af"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-8 10 -6;26 10 -6;-8 10 -6"
+            dur="0.58s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <g>
+          <polygon points="-46,-5 -84,-16 -76,0 -84,16 -46,8" fill="#111827"></polygon>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="2 -46 0;-5 -46 0;2 -46 0"
+            dur="0.58s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <ellipse cx="0" cy="0" rx="48" ry="23" fill="url(#vogelLijf)"></ellipse>
+        <circle cx="42" cy="-17" r="14" fill="#374151"></circle>
+        <circle cx="46" cy="-20" r="2.2" fill="#f9fafb"></circle>
+        <polygon points="56,-20 84,-14 56,-9" fill="#f59e0b"></polygon>
+        <g>
+          <path d="M-4 -6 C-30 -30 -62 -28 -78 -10 C-56 -2 -32 4 -6 6 Z" fill="#6b7280"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 -4 -6;-22 -4 -6;14 -4 -6"
+            dur="0.58s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+      </g>
+    </g>
+
+    <!-- Vogel 6: heel klein, hoog -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-900 20;1900 16"
+        dur="35s"
+        begin="-28s"
+        repeatCount="indefinite"></animateTransform>
+      <g transform="scale(0.30)">
+        <animateTransform
+          attributeName="transform"
+          additive="sum"
+          type="translate"
+          values="0 0;0 -3;0 0;0 3;0 0"
+          dur="0.85s"
+          repeatCount="indefinite"></animateTransform>
+        <g opacity="0.45">
+          <path d="M6 -6 C34 -26 60 -24 76 -8 C56 -2 34 2 10 4 Z" fill="#9ca3af"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-8 10 -6;26 10 -6;-8 10 -6"
+            dur="0.7s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <g>
+          <polygon points="-46,-5 -84,-16 -76,0 -84,16 -46,8" fill="#111827"></polygon>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="2 -46 0;-5 -46 0;2 -46 0"
+            dur="0.7s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+        <ellipse cx="0" cy="0" rx="48" ry="23" fill="url(#vogelLijf)"></ellipse>
+        <circle cx="42" cy="-17" r="14" fill="#374151"></circle>
+        <circle cx="46" cy="-20" r="2.2" fill="#f9fafb"></circle>
+        <polygon points="56,-20 84,-14 56,-9" fill="#f59e0b"></polygon>
+        <g>
+          <path d="M-4 -6 C-30 -30 -62 -28 -78 -10 C-56 -2 -32 4 -6 6 Z" fill="#6b7280"></path>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 -4 -6;-22 -4 -6;14 -4 -6"
+            dur="0.7s"
+            repeatCount="indefinite"></animateTransform>
+        </g>
+      </g>
     </g>
 
     <!-- Verre heuvels -->

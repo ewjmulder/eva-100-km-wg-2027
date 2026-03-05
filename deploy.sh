@@ -7,6 +7,9 @@ if ! firebase projects:list --json > /dev/null 2>&1; then
   firebase login --reauth
 fi
 
+echo "🔍 TypeScript checken..."
+npm run check
+
 echo "🔨 Bouwen..."
 npm run build
 

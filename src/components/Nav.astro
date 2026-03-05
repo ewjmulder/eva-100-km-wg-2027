@@ -4,8 +4,8 @@ const navItems = [
   { href: "/doneer", label: "Doneer" },
   { href: "/donateurs", label: "Donateurs" },
   { href: "/vorige-tochten", label: "Vorige Tochten" },
-  { href: "/gymnaestrada", label: "World Gymnaestrada" },
   { href: "/vragen", label: "Vragen aan Eva" },
+  { href: "/gymnaestrada", label: "World Gymnaestrada" },
 ];
 const huidigPad = Astro.url.pathname;
 ---
@@ -25,8 +25,7 @@ const huidigPad = Astro.url.pathname;
             <a
               href={item.href}
               class={`hover:text-turkoois transition-colors ${huidigPad === item.href ? "text-turkoois" : "text-donker"}`}
-              set:html={item.label}
-            />
+            >{item.label}</a>
           </li>
         ))
       }
@@ -50,8 +49,7 @@ const huidigPad = Astro.url.pathname;
             <a
               href={item.href}
               class="block py-3 font-semibold hover:text-turkoois transition-colors"
-              set:html={item.label}
-            />
+            >{item.label}</a>
           </li>
         ))
       }

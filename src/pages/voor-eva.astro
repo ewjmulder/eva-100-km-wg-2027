@@ -1,9 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { createHash } from 'crypto';
+import Layout from "../layouts/Layout.astro";
+import { createHash } from "crypto";
 
 // PIN wordt server-side gehasht — alleen de hash belandt in de HTML
-const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').digest('hex');
+const pinHash = createHash("sha256")
+  .update(import.meta.env.VOOR_EVA_PIN ?? "")
+  .digest("hex");
 ---
 
 <Layout title="Voor Eva" beschrijving="">
@@ -11,7 +13,6 @@ const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').
     class="min-h-screen py-20 px-4 bg-gradient-to-b from-sky-50 via-blue-50 to-green-50"
   >
     <div class="max-w-2xl mx-auto">
-
       <!-- Hash verborgen in DOM, nooit de echte PIN -->
       <div id="pin-hash" data-hash={pinHash} class="hidden"></div>
 
@@ -19,15 +20,27 @@ const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').
       <div id="pin-scherm" class="text-center">
         <div class="text-5xl mb-4">🔒</div>
         <h1 class="text-2xl font-black text-donker mb-2">Alleen voor Eva</h1>
-        <p class="text-gray-500 mb-6">Voer de pincode in om vragen te beantwoorden.</p>
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-xs mx-auto">
-          <input type="password" id="pin-invoer" placeholder="Pincode"
-            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-center text-2xl tracking-widest focus:border-turkoois focus:outline-none transition-colors mb-4" />
-          <button id="pin-knop"
-            class="w-full bg-turkoois text-white font-black py-3 rounded-xl hover:opacity-90 transition-opacity">
+        <p class="text-gray-500 mb-6">
+          Voer de pincode in om vragen te beantwoorden.
+        </p>
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-xs mx-auto"
+        >
+          <input
+            type="password"
+            id="pin-invoer"
+            placeholder="Pincode"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-center text-2xl tracking-widest focus:border-turkoois focus:outline-none transition-colors mb-4"
+          />
+          <button
+            id="pin-knop"
+            class="w-full bg-turkoois text-white font-black py-3 rounded-xl hover:opacity-90 transition-opacity"
+          >
             Inloggen
           </button>
-          <p id="pin-fout" class="hidden text-red-500 text-sm mt-3">Verkeerde pincode!</p>
+          <p id="pin-fout" class="hidden text-red-500 text-sm mt-3">
+            Verkeerde pincode!
+          </p>
         </div>
       </div>
 
@@ -36,7 +49,9 @@ const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').
         <div class="text-center mb-10">
           <div class="text-5xl mb-3">💬</div>
           <h1 class="text-3xl font-black text-donker">Vragen beantwoorden</h1>
-          <p class="text-gray-500 mt-1">Jouw antwoorden verschijnen bij de donateur op de website.</p>
+          <p class="text-gray-500 mt-1">
+            Jouw antwoorden verschijnen bij de donateur op de website.
+          </p>
         </div>
 
         <div id="vragen-lijst" class="space-y-4">
@@ -48,54 +63,58 @@ const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').
           <p class="text-gray-500">Alle vragen zijn beantwoord!</p>
         </div>
       </div>
-
     </div>
   </section>
 </Layout>
 
 <script>
-  import { haalDonaties, beantwoordVraag } from '../lib/donations';
-  import type { Donatie } from '../lib/donations';
+  import { haalDonaties, beantwoordVraag } from "../lib/donations";
+  import type { Donatie } from "../lib/donations";
 
-  const opgeslagenHash = document.getElementById('pin-hash')?.dataset.hash ?? '';
+  const opgeslagenHash =
+    document.getElementById("pin-hash")?.dataset.hash ?? "";
 
   async function hashPin(pin: string): Promise<string> {
     const data = new TextEncoder().encode(pin);
-    const buffer = await crypto.subtle.digest('SHA-256', data);
-    return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    const buffer = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(buffer))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
   }
 
-  const pinScherm = document.getElementById('pin-scherm')!;
-  const vragenScherm = document.getElementById('vragen-scherm')!;
-  const pinInvoer = document.getElementById('pin-invoer') as HTMLInputElement;
-  const pinFout = document.getElementById('pin-fout')!;
+  const pinScherm = document.getElementById("pin-scherm")!;
+  const vragenScherm = document.getElementById("vragen-scherm")!;
+  const pinInvoer = document.getElementById("pin-invoer") as HTMLInputElement;
+  const pinFout = document.getElementById("pin-fout")!;
 
-  document.getElementById('pin-knop')?.addEventListener('click', controleerPin);
-  pinInvoer.addEventListener('keydown', (e) => { if (e.key === 'Enter') controleerPin(); });
+  document.getElementById("pin-knop")?.addEventListener("click", controleerPin);
+  pinInvoer.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") controleerPin();
+  });
 
   async function controleerPin() {
     const hash = await hashPin(pinInvoer.value);
     if (hash === opgeslagenHash) {
-      pinScherm.classList.add('hidden');
-      vragenScherm.classList.remove('hidden');
+      pinScherm.classList.add("hidden");
+      vragenScherm.classList.remove("hidden");
       laadVragen();
     } else {
-      pinFout.classList.remove('hidden');
-      pinInvoer.value = '';
+      pinFout.classList.remove("hidden");
+      pinInvoer.value = "";
       pinInvoer.focus();
     }
   }
 
   async function laadVragen() {
-    const lijst = document.getElementById('vragen-lijst')!;
-    const geenVragen = document.getElementById('geen-vragen')!;
+    const lijst = document.getElementById("vragen-lijst")!;
+    const geenVragen = document.getElementById("geen-vragen")!;
 
     const donaties = await haalDonaties();
     const metVraag = donaties.filter((d: Donatie) => d.vraag);
 
     if (metVraag.length === 0) {
-      lijst.classList.add('hidden');
-      geenVragen.classList.remove('hidden');
+      lijst.classList.add("hidden");
+      geenVragen.classList.remove("hidden");
       return;
     }
 
@@ -108,40 +127,45 @@ const pinHash = createHash('sha256').update(import.meta.env.VOOR_EVA_PIN ?? '').
 
     gesorteerd.forEach((d: Donatie) => {
       const beantwoord = !!d.antwoord;
-      const kaart = document.createElement('div');
-      kaart.className = `bg-white rounded-2xl border p-6 ${beantwoord ? 'border-turkoois/30 opacity-70' : 'border-gray-200 shadow-sm'}`;
+      const kaart = document.createElement("div");
+      kaart.className = `bg-white rounded-2xl border p-6 ${beantwoord ? "border-turkoois/30 opacity-70" : "border-gray-200 shadow-sm"}`;
 
-      const naam = document.createElement('p');
-      naam.className = 'text-xs text-gray-400 mb-1 font-semibold uppercase tracking-wide';
-      naam.textContent = (d.publiek ? d.naam : 'Anoniem') + (beantwoord ? ' · ✅ beantwoord' : ' · ❓ onbeantwoord');
+      const naam = document.createElement("p");
+      naam.className =
+        "text-xs text-gray-400 mb-1 font-semibold uppercase tracking-wide";
+      naam.textContent =
+        (d.publiek ? d.naam : "Anoniem") +
+        (beantwoord ? " · ✅ beantwoord" : " · ❓ onbeantwoord");
 
-      const vraagTekst = document.createElement('p');
-      vraagTekst.className = 'font-bold text-donker mb-3 break-words';
-      vraagTekst.textContent = d.vraag ?? '';
+      const vraagTekst = document.createElement("p");
+      vraagTekst.className = "font-bold text-donker mb-3 break-words";
+      vraagTekst.textContent = d.vraag ?? "";
 
       kaart.appendChild(naam);
       kaart.appendChild(vraagTekst);
 
       if (beantwoord) {
-        const antwoordTekst = document.createElement('p');
-        antwoordTekst.className = 'text-turkoois text-sm break-words';
-        antwoordTekst.textContent = '💬 ' + d.antwoord;
+        const antwoordTekst = document.createElement("p");
+        antwoordTekst.className = "text-turkoois text-sm break-words";
+        antwoordTekst.textContent = "💬 " + d.antwoord;
         kaart.appendChild(antwoordTekst);
       } else {
-        const textarea = document.createElement('textarea');
-        textarea.className = 'w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-turkoois focus:outline-none resize-none transition-colors mb-3';
+        const textarea = document.createElement("textarea");
+        textarea.className =
+          "w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-turkoois focus:outline-none resize-none transition-colors mb-3";
         textarea.rows = 3;
-        textarea.placeholder = 'Jouw antwoord…';
+        textarea.placeholder = "Jouw antwoord…";
         textarea.maxLength = 300;
 
-        const knop = document.createElement('button');
-        knop.className = 'bg-turkoois text-white font-black px-6 py-2 rounded-xl hover:opacity-90 transition-opacity text-sm';
-        knop.textContent = 'Opslaan';
+        const knop = document.createElement("button");
+        knop.className =
+          "bg-turkoois text-white font-black px-6 py-2 rounded-xl hover:opacity-90 transition-opacity text-sm";
+        knop.textContent = "Opslaan";
 
-        knop.addEventListener('click', async () => {
+        knop.addEventListener("click", async () => {
           const tekst = textarea.value.trim();
           if (!tekst || !d.id) return;
-          knop.textContent = '⏳ Opslaan…';
+          knop.textContent = "⏳ Opslaan…";
           knop.disabled = true;
           await beantwoordVraag(d.id, tekst);
           laadVragen();

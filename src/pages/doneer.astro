@@ -4,20 +4,21 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout
   title="Doneer"
-  beschrijving="Steun Eva's fietstocht van 100 km met een donatie-belofte per kilometer."
+  beschrijving="Steun Eva's fietstocht van 100 km met een belofte in cent per kilometer."
 >
   <section
     class="min-h-screen py-20 px-4 bg-gradient-to-b from-sky-50 via-blue-50 to-green-50"
   >
     <div class="max-w-lg mx-auto">
       <div class="text-center mb-10">
-        <div class="text-5xl mb-3">💶</div>
+        <div class="text-5xl mb-3">💶💰💵</div>
         <h1 class="text-4xl font-black mb-3">
           <span class="gradient-tekst">Doneer</span>
         </h1>
         <p class="text-gray-500">
-          Kies een bedrag per kilometer. Als Eva de volle 100 km haalt gaat dat
-          dus x 100, anders x zoveel km als ze gefietst heeft.
+          Kies hoeveel cent je per kilometer doneert.
+          <br />
+          Bij 100 km is 1 ct/km dus € 1,00 totaal — elk beetje helpt!
           <br />
           Betaling gaat buiten de website om — we nemen contact op!
         </p>
@@ -58,6 +59,7 @@ import Layout from "../layouts/Layout.astro";
             maxlength="100"
             placeholder="Bijv. Simone Biles"
             class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
+            aria-describedby="fout-naam"
           />
           <p id="fout-naam" class="hidden text-red-500 text-sm mt-1">
             Vul je naam in
@@ -82,6 +84,7 @@ import Layout from "../layouts/Layout.astro";
             maxlength="200"
             placeholder="Bijv. 06-12345678 of simone@biles.com"
             class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
+            aria-describedby="fout-contact"
           />
           <p id="fout-contact" class="hidden text-red-500 text-sm mt-1">
             Vul je contactgegevens in
@@ -90,42 +93,43 @@ import Layout from "../layouts/Layout.astro";
 
         <div>
           <label class="block text-sm font-bold text-gray-700 mb-3"
-            >Bedrag per kilometer *</label
+            >Cent per kilometer *</label
           >
-          <div class="grid grid-cols-4 gap-2 mb-3">
+          <div class="grid grid-cols-3 gap-2 mb-3">
             {
-              [0.1, 0.25, 0.5, 1.0].map((bedrag) => (
+              [1, 5, 10, 25, 50, 100].map((ct) => (
                 <button
                   type="button"
                   class="preset-knop border-2 border-gray-200 rounded-xl py-3 font-bold text-sm hover:border-turkoois hover:text-turkoois transition-all"
-                  data-bedrag={String(bedrag)}
+                  data-centen={String(ct)}
                 >
-                  € {bedrag.toFixed(2)}
+                  {ct} cent/km
                 </button>
               ))
             }
           </div>
-          <div class="flex items-center gap-2">
-            <span class="text-gray-500 font-medium">€</span>
+          <div class="flex items-center gap-3">
             <input
               type="number"
-              id="bedrag-per-km"
-              min="0.01"
-              max="10"
-              step="0.01"
-              placeholder="Zelf invoeren"
-              class="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
+              id="centen-per-km"
+              min="1"
+              max="1000"
+              step="1"
+              placeholder="b.v. 5"
+              class="w-24 border-2 border-gray-200 rounded-xl px-3 py-3 focus:border-turkoois focus:outline-none transition-colors text-center"
+              aria-describedby="fout-bedrag"
             />
-            <span class="text-gray-500 font-medium whitespace-nowrap">/ km</span
+            <span class="text-gray-500 font-medium whitespace-nowrap"
+              >cent/km</span
             >
+            <span class="text-sm text-gray-500 whitespace-nowrap">
+              = <span id="totaal-preview" class="font-bold text-turkoois"
+                >€ 0,00</span
+              > bij 100 km
+            </span>
           </div>
           <p id="fout-bedrag" class="hidden text-red-500 text-sm mt-1">
-            Kies een geldig bedrag (€ 0,01 – € 10,00 per km)
-          </p>
-          <p class="text-sm text-gray-400 mt-2">
-            = <span id="totaal-preview" class="font-bold text-turkoois"
-              >€ 0,00</span
-            > totaal bij 100 km
+            Kies een geldig aantal cent (1 – 1000 ct/km)
           </p>
         </div>
 
@@ -180,7 +184,7 @@ import Layout from "../layouts/Layout.astro";
           id="submit-knop"
           class="w-full bg-oranje hover:bg-orange-400 text-white font-black text-lg py-4 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-oranje/30"
         >
-          <span class="fiets-rechts">🚴</span> Beloof mijn donatie!
+          <span class="fiets-rechts">🚴</span> Beloof mijn donatie! 💰
         </button>
 
         <div
@@ -200,9 +204,9 @@ import Layout from "../layouts/Layout.astro";
   // Preset knoppen
   document.querySelectorAll(".preset-knop").forEach((knop) => {
     knop.addEventListener("click", () => {
-      const bedrag = (knop as HTMLElement).dataset.bedrag ?? "";
-      (document.getElementById("bedrag-per-km") as HTMLInputElement).value =
-        bedrag;
+      const centen = (knop as HTMLElement).dataset.centen ?? "";
+      (document.getElementById("centen-per-km") as HTMLInputElement).value =
+        centen;
       document
         .querySelectorAll(".preset-knop")
         .forEach((k) =>
@@ -218,14 +222,14 @@ import Layout from "../layouts/Layout.astro";
   });
 
   function updateVooruitkijk() {
-    const invoer = document.getElementById("bedrag-per-km") as HTMLInputElement;
+    const invoer = document.getElementById("centen-per-km") as HTMLInputElement;
     const preview = document.getElementById("totaal-preview");
-    const bedrag = parseFloat(invoer?.value ?? "0") || 0;
-    if (preview) preview.textContent = formatEuro(bedrag * 100);
+    const centen = parseInt(invoer?.value ?? "0") || 0;
+    if (preview) preview.textContent = formatEuro(centen);
   }
 
   document
-    .getElementById("bedrag-per-km")
+    .getElementById("centen-per-km")
     ?.addEventListener("input", updateVooruitkijk);
 
   function gooidConfetti() {
@@ -275,10 +279,13 @@ import Layout from "../layouts/Layout.astro";
   }
 
   // Wis veldfouten zodra de gebruiker begint met typen
-  ["naam", "contact", "bedrag-per-km"].forEach((id) => {
+  ["naam", "contact"].forEach((id) => {
     document.getElementById(id)?.addEventListener("input", () => {
       verbergVeldFout(id, `fout-${id}`);
     });
+  });
+  document.getElementById("centen-per-km")?.addEventListener("input", () => {
+    verbergVeldFout("centen-per-km", "fout-bedrag");
   });
 
   document
@@ -295,9 +302,8 @@ import Layout from "../layouts/Layout.astro";
       const knop = document.getElementById("submit-knop") as HTMLButtonElement;
 
       // Wis alle fouten
-      ["naam", "contact", "bedrag-per-km"].forEach((id) =>
-        verbergVeldFout(id, `fout-${id}`),
-      );
+      ["naam", "contact"].forEach((id) => verbergVeldFout(id, `fout-${id}`));
+      verbergVeldFout("centen-per-km", "fout-bedrag");
 
       // Valideer verplichte velden
       const naam = (
@@ -306,10 +312,10 @@ import Layout from "../layouts/Layout.astro";
       const contact = (
         (document.getElementById("contact") as HTMLInputElement)?.value ?? ""
       ).trim();
-      const bedragInvoer =
-        (document.getElementById("bedrag-per-km") as HTMLInputElement)?.value ??
+      const centenInvoer =
+        (document.getElementById("centen-per-km") as HTMLInputElement)?.value ??
         "";
-      const bedragPerKm = parseFloat(bedragInvoer);
+      const centenPerKm = parseInt(centenInvoer);
 
       let heeftFout = false;
 
@@ -325,9 +331,9 @@ import Layout from "../layouts/Layout.astro";
         heeftFout = true;
       }
 
-      if (isNaN(bedragPerKm) || bedragPerKm <= 0 || bedragPerKm > 10) {
+      if (isNaN(centenPerKm) || centenPerKm < 1 || centenPerKm > 1000) {
         document
-          .getElementById("bedrag-per-km")
+          .getElementById("centen-per-km")
           ?.classList.add("border-red-400");
         document.getElementById("fout-bedrag")?.classList.remove("hidden");
         heeftFout = true;
@@ -355,7 +361,7 @@ import Layout from "../layouts/Layout.astro";
         await voegDonatieToe({
           naam,
           contact,
-          bedragPerKm,
+          bedragPerKm: centenPerKm / 100,
           bericht: berichtWaarde || undefined,
           vraag: vraagWaarde || undefined,
           publiek,
