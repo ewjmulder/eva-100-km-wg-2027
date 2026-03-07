@@ -5,7 +5,7 @@ service cloud.firestore {
       allow read: if true;
       allow create: if request.resource.data.naam is string
                     && request.resource.data.naam.size() > 0
-                    && request.resource.data.naam.size() < 100
+                    && request.resource.data.naam.size() <= 100
                     && request.resource.data.bedragPerKm is number
                     && request.resource.data.bedragPerKm > 0
                     && request.resource.data.bedragPerKm <= 10

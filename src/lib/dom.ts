@@ -23,7 +23,7 @@ export function formatEuro(bedrag: number): string {
 /** Maak een donateur-kaartje als DOM node (geen innerHTML met gebruikersdata) */
 export function maakDonateurKaartje(donatie: Donatie): HTMLElement {
   const kaart = maakEl('div',
-    'bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-start gap-4'
+    'bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-start gap-4 min-w-0'
   );
 
   // Avatar met eerste letter van naam
@@ -38,7 +38,7 @@ export function maakDonateurKaartje(donatie: Donatie): HTMLElement {
 
   const rij = maakEl('div', 'flex items-center justify-between gap-2 mb-1');
   rij.appendChild(
-    maakEl('span', 'font-bold text-donker truncate', donatie.publiek ? donatie.naam : 'Anoniem')
+    maakEl('span', 'font-bold text-donker truncate min-w-0', donatie.publiek ? donatie.naam : 'Anoniem')
   );
   rij.appendChild(
     maakEl('span', 'font-black text-turkoois whitespace-nowrap', formatEuro(donatie.bedragPerKm * 100))

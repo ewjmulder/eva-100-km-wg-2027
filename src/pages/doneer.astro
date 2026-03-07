@@ -61,9 +61,7 @@ import Layout from "../layouts/Layout.astro";
             class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-turkoois focus:outline-none transition-colors"
             aria-describedby="fout-naam"
           />
-          <p id="fout-naam" class="hidden text-red-500 text-sm mt-1">
-            Vul je naam in
-          </p>
+          <p id="fout-naam" class="hidden text-red-500 text-sm mt-1"></p>
         </div>
 
         <div>
@@ -319,9 +317,14 @@ import Layout from "../layouts/Layout.astro";
 
       let heeftFout = false;
 
+      const foutNaamEl = document.getElementById("fout-naam");
       if (!naam) {
         document.getElementById("naam")?.classList.add("border-red-400");
-        document.getElementById("fout-naam")?.classList.remove("hidden");
+        if (foutNaamEl) { foutNaamEl.textContent = "Vul je naam in"; foutNaamEl.classList.remove("hidden"); }
+        heeftFout = true;
+      } else if (naam.length > 100) {
+        document.getElementById("naam")?.classList.add("border-red-400");
+        if (foutNaamEl) { foutNaamEl.textContent = "Naam mag maximaal 100 tekens zijn"; foutNaamEl.classList.remove("hidden"); }
         heeftFout = true;
       }
 

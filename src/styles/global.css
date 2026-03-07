@@ -11,7 +11,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-donker font-sans;
+    @apply bg-white text-donker font-sans overflow-x-hidden;
   }
   h1, h2, h3 {
     @apply font-bold;
